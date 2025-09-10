@@ -500,9 +500,11 @@ case 4: // Delete
 
 **Case 5 (Exit)** mengubah boolean `jalan` menjadi `false`, sehingga loop utama berhenti dan program keluar. Sebelum keluar, program menampilkan pesan terima kasih.
 
+Dan terakhir setelah looping case nya kita tutup ada `input.close()` buat nutup scaner biar bisa istirahat karena setiap resource yang dibuka sebaiknya ditutup.
 
 
-di program ini saya menggunakan `.trim` agar user tidak menginput hanya spasi karena kegunaan trim adalah untuk menghapus spasi yang berada sebelum dan sesudah karakter contoh "   lap top   " maka akan terbada "lap top" karena trim lalu saya menggunakan <0 untuk stok agar user tidak bisa menginput value negatif, koma, dan huruf, Tetapi karena ini nextInt dia tidak bisa menerima inputan `hanya` spasi jika itu terjadi maka inputan akan ngestuck sampai user menginput sesuatu yang invalid untuk hal ini adalah value negatif, koma, dan huruf baru kita bisa keluar dari inputan dan di kembalikan ke menu awal.
+
+di program ini saya menggunakan `.trim` agar user tidak menginput hanya spasi karena kegunaan trim adalah untuk menghapus spasi yang berada sebelum dan sesudah karakter contoh "   lap top   " maka akan terbada "lap top" karena trim lalu saya menggunakan <0 untuk stok agar user tidak bisa menginput value negatif, koma, dan huruf, Tetapi karena ini nextInt dia tidak bisa menerima inputan **`hanya`** spasi jika itu terjadi maka inputan akan ngestuck sampai user menginput sesuatu yang invalid untuk hal ini adalah value negatif, koma, dan huruf baru kita bisa keluar dari inputan dan di kembalikan ke menu awal.
 
 </details>
 <details>
