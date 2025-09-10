@@ -7,7 +7,7 @@ Tema: Inventaris Gudang
 Program Sederhana manajemen gudang yang untuk sekarang hanya bisa CRUD tapi memili security yang cukup lengkap
  # Source Code
 <details>
-  <summary> </> #️⃣ Source Code </summary>
+  <summary> 🧑🏿‍💻 #️⃣ Source Code </summary>
  
 
   
