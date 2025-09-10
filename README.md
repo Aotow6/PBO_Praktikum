@@ -244,6 +244,7 @@ Scanner input = new Scanner(System.in);
 </details>
 <details>
   <summary> ✍🏿🥸 Penjelasan kode </summary>
+ 
 ## Package yang dipakai
 ``` java
 import java.util.Scanner;
