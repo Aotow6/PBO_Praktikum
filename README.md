@@ -7,7 +7,7 @@ Tema: Inventaris Gudang
 Program Sederhana manajemen gudang yang untuk sekarang hanya bisa CRUD tapi memili security yang cukup lengkap
  # Source Code
 <details>
-  <summary> # Source Code </summary>
+  <summary> </> #️⃣ Source Code </summary>
  
 
   
@@ -242,7 +242,8 @@ Scanner input = new Scanner(System.in);
 }
 ```
 </details>
-
+<details>
+  <summary> ✍🏿🥸 Penjelasan kode </summary>
 ## Package yang dipakai
 ``` java
 import java.util.Scanner;
@@ -502,6 +503,9 @@ case 4: // Delete
 
 di program ini saya menggunakan `.trim` agar user tidak menginput hanya spasi karena kegunaan trim adalah untuk menghapus spasi yang berada sebelum dan sesudah karakter contoh "   lap top   " maka akan terbada "lap top" karena trim lalu saya menggunakan <0 untuk stok agar user tidak bisa menginput value negatif, koma, dan huruf, Tetapi karena ini nextInt dia tidak bisa menerima inputan `hanya` spasi jika itu terjadi maka inputan akan ngestuck sampai user menginput sesuatu yang invalid untuk hal ini adalah value negatif, koma, dan huruf baru kita bisa keluar dari inputan dan di kembalikan ke menu awal.
 
+</details>
+<details>
+  <summary> 🖥️📤📥 Output </summary>
 ## Output Program
 ### Menu Utama
 <img width="410" height="156" alt="Screenshot 2025-09-10 171628" src="https://github.com/user-attachments/assets/27a2b5a1-f04c-41cd-bbd4-8419cfbe227b" />
@@ -558,3 +562,6 @@ oh iya karna saya pakai equalsIgnoreCase buat cocokin id maka inputan user tidak
 <img width="434" height="222" alt="Screenshot 2025-09-10 172918" src="https://github.com/user-attachments/assets/50f28da9-2084-4829-a9f6-d1efc7e16b76" />
 
 Masukkan angka 5 pada menu utama untuk keluar dari program.
+
+</details>
+
