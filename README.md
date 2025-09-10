@@ -506,6 +506,7 @@ di program ini saya menggunakan `.trim` agar user tidak menginput hanya spasi ka
 </details>
 <details>
   <summary> 🖥️📤📥 Output </summary>
+ 
 ## Output Program
 ### Menu Utama
 <img width="410" height="156" alt="Screenshot 2025-09-10 171628" src="https://github.com/user-attachments/assets/27a2b5a1-f04c-41cd-bbd4-8419cfbe227b" />
