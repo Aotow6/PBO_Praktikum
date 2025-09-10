@@ -1,4 +1,3 @@
-<details>
   <summary>📦 Package yang Dipakai</summary>
 
   ```java
