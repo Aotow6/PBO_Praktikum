@@ -89,10 +89,15 @@ Pada awal pada awal menu create kita akan diperlihatkan daftar barang lalu user 
 <img width="306" height="136" alt="image" src="https://github.com/user-attachments/assets/42487f9c-2303-44c0-9406-a34be607788c" />
 
 jika id tidak ada dalam daftar barang maka user akan lanjut tahap pengisian data buat barang yaitu nama, stom dan, lokasi disini ada validasi yaitu validasi jika input kosong dan untuk stok ada validasi yang mencegah user untuk mengiput stok yang ber nilai negatif / koma.
+    
 ---
 ## 2 / Read
 <img width="432" height="594" alt="image" src="https://github.com/user-attachments/assets/d24bdb78-06be-41b9-9ddf-9f68e7df578d" />
+<img width="207" height="63" alt="image" src="https://github.com/user-attachments/assets/854649c0-0943-4bca-83fc-19bb8254feaa" />
+
+
 Disini tempat kita melihat daftar barang dan total barang.
+
 ---
 ## 3 / Update
 <img width="504" height="491" alt="image" src="https://github.com/user-attachments/assets/e3d1f350-d476-41df-bef2-f1264c810d12" />
