@@ -13,7 +13,7 @@ Program Sederhana manajemen gudang yang untuk sekarang hanya bisa CRUD tapi memi
   
 
 </details>
-<details>
+<!-- <details>
   <summary> ✍🏿🥸 Penjelasan kode </summary>
  
 
