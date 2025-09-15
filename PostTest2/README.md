@@ -18,12 +18,12 @@ Program ini merupakan **pengembangan dari Post Test 1** dengan penerapan package
 
 ## 📂 Struktur Packages (MVC)
 src/ /n
-⬇️ main/
-➡️ Main.java → Entry point program (menu utama / View)
-⬇️ service/
-➡️ ManajemenGudang.java → Logika CRUD + Search + Validasi (Controller)
-⬇️ model/
-➡️ Barang.java → Struktur data barang (Model)
+└── main/
+    └── Main.java → Entry point program (menu utama / View)
+└── service/
+    └── ManajemenGudang.java → Logika CRUD + Search + Validasi (Controller)
+└── model/
+    └── Barang.java → Struktur data barang (Model)
 
 ## 💃 Model (`Barang`)**
   Berisi struktur data, atribut, dan constructor untuk merepresentasikan barang.  
