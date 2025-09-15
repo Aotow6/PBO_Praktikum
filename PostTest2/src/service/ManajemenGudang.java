@@ -146,6 +146,8 @@ public class ManajemenGudang {
 
     // Delete
     public void hapusBarang() {
+        lihatBarang();
+        System.out.println();
         System.out.print("Masukkan ID Barang yang ingin dihapus: ");
         String id = input.nextLine();
         for (Barang b : daftarBarang) {
@@ -159,17 +161,17 @@ public class ManajemenGudang {
         System.out.println("Barang tidak ditemukan.");
     }
 
-    // Search
+// Search
     public void cariBarang() {
         System.out.print("Masukkan kata kunci (ID/Nama): ");
-        String keyword = input.nextLine().trim();
+        String keyword = input.nextLine().trim().toLowerCase();
 
         if (keyword.isEmpty()) {
             System.out.println("Kata kunci tidak boleh kosong.");
             return;
         }
-        boolean ditemukan = false;
 
+        boolean ditemukan = false;
         for (Barang b : daftarBarang) {
             if (b.getIdBarang().toLowerCase().contains(keyword) ||
                     b.getNamaBarang().toLowerCase().contains(keyword)) {
@@ -181,8 +183,10 @@ public class ManajemenGudang {
                 ditemukan = true;
             }
         }
+
         if (!ditemukan) {
             System.out.println("Barang tidak ditemukan.");
         }
     }
+
 }
