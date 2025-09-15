@@ -110,6 +110,7 @@ Pada awal pada awal menu update kita akan diperlihatkan daftar barang lalu user 
 <img width="273" height="42" alt="image" src="https://github.com/user-attachments/assets/f920ccb0-131c-4168-a935-eed6feec0a77" />
 
 Di tahap ini user diminta untuk mengisi data baru pada id yang ingin di ubah jika user tapi mengisi kosong/langsung enter maka data tidak akan berubah dan akan tetap sama seperti data lama, terdapat validasi juga disini pada stok agar user tidak bisa mengisi negatif atau koma 
+
 ---
 ## 4 / Delete
 <img width="465" height="669" alt="image" src="https://github.com/user-attachments/assets/fd7a686a-05c8-495b-9950-8e0bbfb643fe" /> <br>         
@@ -133,5 +134,6 @@ user diminta untuk memasukan keyword pencarian berdasarkan id/nama barang jika u
 ---
 ## 6 / Exit
 <img width="395" height="233" alt="image" src="https://github.com/user-attachments/assets/6cf874d8-7003-418b-a314-51ebff3f35ea" />
+
 Keluar dari program.
 </details>
