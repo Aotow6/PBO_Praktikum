@@ -124,7 +124,7 @@ Setelah menampilkan daftar barang user diminta input id barang yang ingin dihapu
 ## 5 / Search
 
 <img width="382" height="248" alt="image" src="https://github.com/user-attachments/assets/d6605979-1d24-49cb-9f39-df421390ae89" /> <br>
-<img width="358" height="276" alt="image" src="https://github.com/user-attachments/assets/47934252-d1d5-4844-ac92-0f9bce812573" />  <img width="377" height="171" alt="image" src="https://github.com/user-attachments/assets/66408e42-3f9d-4a60-a9da-a52655351fe9" /> <br?
+<img width="358" height="276" alt="image" src="https://github.com/user-attachments/assets/47934252-d1d5-4844-ac92-0f9bce812573" />  <img width="377" height="171" alt="image" src="https://github.com/user-attachments/assets/66408e42-3f9d-4a60-a9da-a52655351fe9" /> <br>
 
 <img width="345" height="93" alt="image" src="https://github.com/user-attachments/assets/07d1253c-9de6-4a39-a076-09400b90f10a" />
 
