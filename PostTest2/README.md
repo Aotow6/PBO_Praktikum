@@ -17,7 +17,7 @@ Program ini merupakan **pengembangan dari Post Test 1** dengan penerapan package
 ---
 
 ## 📂 Struktur Packages (MVC)
-src/
+src/ /n
 ⬇️ main/
 ➡️ Main.java → Entry point program (menu utama / View)
 ⬇️ service/
@@ -25,19 +25,11 @@ src/
 ⬇️ model/
 ➡️ Barang.java → Struktur data barang (Model)
 
-
-- ** 💃 Model (`Barang`)**
+## 💃 Model (`Barang`)**
   Berisi struktur data, atribut, dan constructor untuk merepresentasikan barang.  
   Berisi **4 properti**: `idBarang`, `namaBarang`, `stok`, `lokasi`.  
   Semua properti bersifat **private** dengan **getter & setter** serta **constructor**.  
   Contoh properti:
-  ```java
-  private String idBarang;
-  private String namaBarang;
-  private int stok;
-  private String lokasi;
-  ```
----
 
 ## 🎮 Controller (`ManajemenGudang`)  
 Berada di package service.
