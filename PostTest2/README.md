@@ -34,7 +34,7 @@ src/
   Contoh properti:
 
 ## 🎮 Controller (`ManajemenGudang`)  
-Berada di package service.
+Berada di package service. <br>
 Controller bertanggung jawab mengatur logika utama program, yaitu:  
 - Tambah Barang (**Create**)  
 - Lihat Barang (**Read**)  
@@ -51,7 +51,7 @@ Controller bertanggung jawab mengatur logika utama program, yaitu:
 ---
 
 ## 👁️ View (`Main`)  
-Berada di package main.
+Berada di package main.<br>
 View bertugas menampilkan **menu utama** kepada pengguna menggunakan **switch-case**,  serta menangani interaksi dengan user melalui Scanner..  
 
 ### Menu yang tersedia:  
@@ -63,7 +63,39 @@ View bertugas menampilkan **menu utama** kepada pengguna menggunakan **switch-ca
 6. Keluar  
 
 <details>
-  <summary> 🧑🏿‍💻 #️⃣ Whats new? </summary>
+  <summary> 🌊 #️⃣ Alur </summary>
+  Program dimulai dengan menampilkan menu utama.
+
+User memilih menu dengan memasukkan angka (1–6).
+
+Jika input bukan angka → muncul pesan error.
+
+Menu CRUD:
+
+Tambah Barang (Create)
+User memasukkan data barang baru. Program akan mengecek:
+
+ID tidak boleh kosong & tidak boleh duplikat.
+
+Nama & lokasi tidak boleh kosong.
+
+Stok harus berupa angka positif.
+Jika valid → data masuk ke daftar barang.
+
+Lihat Barang (Read)
+Menampilkan daftar barang lengkap beserta total barang.
+
+Update Barang
+User memasukkan ID barang → jika ada, bisa mengubah nama, stok, atau lokasi.
+Tekan Enter tanpa input → data lama tetap digunakan.
+
+Hapus Barang (Delete)
+User memasukkan ID → jika valid, data barang dihapus dari daftar.
+
+Cari Barang (Search)
+User bisa mencari berdasarkan ID atau Nama barang. Program akan menampilkan barang yang sesuai.
+
+Keluar Program dengan memilih menu 6.
  
 
   
