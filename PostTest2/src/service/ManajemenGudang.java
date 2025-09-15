@@ -7,11 +7,18 @@ import java.util.Scanner;
 public class ManajemenGudang {
     private ArrayList<Barang> daftarBarang = new ArrayList<>();
     private Scanner input = new Scanner(System.in);
+    private int totalBarang;
 
     // Data dummy
     public ManajemenGudang() {
         daftarBarang.add(new Barang("B001", "Laptop", 10, "Rak A"));
         daftarBarang.add(new Barang("B002", "Printer", 5, "Rak B"));
+        totalBarang = daftarBarang.size(); // sinkron awal
+    }
+
+    // getter totalBarang
+    public int getTotalBarang() {
+        return totalBarang;
     }
 
     // Create
@@ -41,7 +48,6 @@ public class ManajemenGudang {
 
             System.out.print("Masukkan Stok: ");
             String stokInput = input.nextLine().trim();
-
             if (stokInput.isEmpty()) {
                 System.out.println("Input stok tidak boleh kosong!");
                 return;
@@ -67,6 +73,7 @@ public class ManajemenGudang {
             }
 
             daftarBarang.add(new Barang(id.toUpperCase(), nama, stok, lokasi));
+            totalBarang++; // update properti
             System.out.println("Barang berhasil ditambahkan!");
         } catch (Exception e) {
             System.out.println("Input stok harus berupa angka!");
@@ -88,6 +95,7 @@ public class ManajemenGudang {
             System.out.println("Lokasi : " + b.getLokasi());
             System.out.println("-------------------------");
         }
+        System.out.println("Total barang: " + totalBarang);
     }
 
     // Update
@@ -101,13 +109,13 @@ public class ManajemenGudang {
             if (b.getIdBarang().equalsIgnoreCase(id)) {
                 System.out.println("Silahkan isi data baru / tekan Enter untuk mempertahankan data lama.");
 
-                System.out.print("Nama baru (Data lama: "+ b.getNamaBarang() +" ): ");
+                System.out.print("Nama baru (Data lama: " + b.getNamaBarang() + " ): ");
                 String nama = input.nextLine().trim();
                 if (!nama.isEmpty()) {
                     b.setNamaBarang(nama);
                 }
 
-                System.out.print("Stok baru (Data lama: "+ b.getStok() + " ): ");
+                System.out.print("Stok baru (Data lama: " + b.getStok() + " ): ");
                 String stokInput = input.nextLine().trim();
 
                 if (!stokInput.isEmpty()) {
@@ -123,7 +131,7 @@ public class ManajemenGudang {
                         return;
                     }
                 }
-                System.out.print("Lokasi baru (Data lama: "+ b.getLokasi() +" ): ");
+                System.out.print("Lokasi baru (Data lama: " + b.getLokasi() + " ): ");
                 String lokasi = input.nextLine().trim();
                 if (!lokasi.isEmpty()) {
                     b.setLokasi(lokasi);
@@ -143,6 +151,7 @@ public class ManajemenGudang {
         for (Barang b : daftarBarang) {
             if (b.getIdBarang().equalsIgnoreCase(id)) {
                 daftarBarang.remove(b);
+                totalBarang--; // update properti
                 System.out.println("Barang berhasil dihapus!");
                 return;
             }
@@ -158,7 +167,8 @@ public class ManajemenGudang {
         if (keyword.isEmpty()) {
             System.out.println("Kata kunci tidak boleh kosong.");
             return;
-        }        boolean ditemukan = false;
+        }
+        boolean ditemukan = false;
 
         for (Barang b : daftarBarang) {
             if (b.getIdBarang().toLowerCase().contains(keyword) ||
