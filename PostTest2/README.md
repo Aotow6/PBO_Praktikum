@@ -27,40 +27,43 @@ src/
     └── Barang.java → Struktur data barang (Model)
 </pre>
 
-## 💃 Model (`Barang`)**
-  Berisi struktur data, atribut, dan constructor untuk merepresentasikan barang.  
-  Berisi **4 properti**: `idBarang`, `namaBarang`, `stok`, `lokasi`.  
-  Semua properti bersifat **private** dengan **getter & setter** serta **constructor**.  
-  Contoh properti:
+# 🧩 Apa itu MVC?
+**MVC (Model-View-Controller)** adalah pola arsitektur yang memisahkan program menjadi tiga bagian utama:  
+- **Model** → Menyimpan data dan aturan bisnis.  
+- **View** → Menangani tampilan / interaksi dengan pengguna.  
+- **Controller** → Mengatur logika program dan menjadi penghubung antara Model dan View.  
 
-## 🎮 Controller (`ManajemenGudang`)  
-Berada di package service. <br>
-Controller bertanggung jawab mengatur logika utama program, yaitu:  
-- Tambah Barang (**Create**)  
-- Lihat Barang (**Read**)  
-- Update Barang  
-- Hapus Barang  
-- Cari Barang  
-- Hitung Total Barang  
-
-### Properti utama di `ManajemenGudang`  
-- `ArrayList<Barang> daftarBarang` → menyimpan data barang  
-- `Scanner input` → menerima input user  
-- `int totalBarang` → menghitung total barang dalam gudang  
+Dengan pemisahan ini, program menjadi lebih **terstruktur**, **mudah dirawat**, dan **mudah dikembangkan**.
 
 ---
 
-## 👁️ View (`Main`)  
-Berada di package main.<br>
-View bertugas menampilkan **menu utama** kepada pengguna menggunakan **switch-case**,  serta menangani interaksi dengan user melalui Scanner..  
+## 📦 Model (`Barang`)
+- Menyimpan data barang berupa **properti**: `idBarang`, `namaBarang`, `stok`, `lokasi`.  
+- Semua properti bersifat **private**.  
+- Disediakan **constructor** untuk inisialisasi, serta **getter & setter** untuk mengakses / mengubah data.  
+- **Tugas utama**: merepresentasikan **struktur data** barang di gudang.
 
-### Menu yang tersedia:  
-1. Tambah Barang  
-2. Lihat Barang  
-3. Update Barang  
-4. Hapus Barang  
-5. Cari Barang  
-6. Keluar  
+---
+
+## 👁️ View (`Main`)
+- Berada di package `main`.  
+- Berfungsi sebagai **entry point** aplikasi.  
+- Isinya hanya **memanggil method `run()`** dari `ManajemenGudang`.  
+- **Tugas utama**: Menjadi penghubung pertama sebelum user diarahkan ke logika Controller.  
+- Semua logika menu & CRUD sudah dipindahkan ke Controller.
+
+---
+
+## 🎮 Controller (`ManajemenGudang`)
+- Berada di package `service`.  
+- Menangani seluruh **logika utama program**.  
+- Berfungsi sebagai **penghubung** antara View (`Main`) dengan Model (`Barang`).  
+- **Tugas utama**:
+  - Menampilkan menu utama (switch-case).  
+  - Menangani input user (dengan validasi).  
+  - Menjalankan operasi **CRUD** (Create, Read, Update, Delete).  
+  - Fitur tambahan seperti **Search** dan **Hitung Total Barang**.  
+
 
 
 <details>
