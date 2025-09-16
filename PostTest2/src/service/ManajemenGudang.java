@@ -188,5 +188,46 @@ public class ManajemenGudang {
             System.out.println("Barang tidak ditemukan.");
         }
     }
+    public void run() {
+        boolean jalan = true;
+        while (jalan) {
+            tampilkanMenu();
+            int pilihan = getInputMenu();
+
+            switch (pilihan) {
+                case 1 -> tambahBarang();
+                case 2 -> lihatBarang();
+                case 3 -> updateBarang();
+                case 4 -> hapusBarang();
+                case 5 -> cariBarang();
+                case 6 -> {
+                    System.out.println("Terima kasih, program selesai.");
+                    jalan = false;
+                }
+                default -> System.out.println("Pilihan tidak valid.");
+            }
+        }
+    }
+
+    private void tampilkanMenu() {
+        System.out.println("\n+====== MENU INVENTARIS GUDANG ======+");
+        System.out.println("|   1. Tambah Barang                 |");
+        System.out.println("|   2. Lihat Daftar Barang           |");
+        System.out.println("|   3. Update Barang                 |");
+        System.out.println("|   4. Hapus Barang                  |");
+        System.out.println("|   5. Cari Barang                   |");
+        System.out.println("|   6. Keluar                        |");
+        System.out.println("+====================================+");
+        System.out.print("Pilih menu: ");
+    }
+
+    private int getInputMenu() {
+        try {
+            return Integer.parseInt(input.nextLine().trim());
+        } catch (NumberFormatException e) {
+            System.out.println("Input menu harus berupa angka!");
+            return -1;
+        }
+    }
 
 }
