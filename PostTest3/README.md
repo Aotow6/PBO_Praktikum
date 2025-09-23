@@ -4,67 +4,55 @@ NIM: 2409116067\
 Tema: Inventaris Gudang
 
 # Deskripsi
-Program ini adalah aplikasi **CRUD sederhana** (Create, Read, Update, Delete) untuk mengelola data inventaris gudang.  
-Aplikasi dikembangkan dengan bahasa pemrograman **Java** menggunakan konsep **OOP** dan menerapkan prinsip **MVC (Model-View-Controller)**.  
+Program ini adalah aplikasi sederhana untuk **manajemen inventaris gudang** menggunakan bahasa pemrograman Java.  
+Fungsinya untuk melakukan operasi dasar **CRUD (Create, Read, Update, Delete)** terhadap data barang.  
 
-Selain operasi CRUD, program juga dilengkapi dengan:
-- **Validasi input** (mencegah data kosong, stok negatif, atau format salah).
-- **Fitur pencarian (Search)** berdasarkan ID atau Nama barang.
-- **Perhitungan total barang** yang ditampilkan secara otomatis.
-
-Program ini merupakan **pengembangan dari Post Test 1** dengan penerapan packages, constructor, access modifier, dan pemisahan kode sesuai arsitektur MVC.
+Program ini sudah menerapkan:
+- **Encapsulation** (getter & setter untuk proteksi data)  
+- **Inheritance** (superclass `Barang`, subclass `Elektronik` & `Perabot`)  
+- **Overriding** (method `tampilkanInfo()` dioverride di subclass)  
+- **Validasi input** (mencegah data kosong, negatif, atau duplikat)  
+- **Struktur MVC sederhana** dengan pemisahan package:  
+  - `model` → struktur data  
+  - `service` → logika program (Controller)  
+  - `main` → tampilan menu (View)
 
 ---
 
 ## 📂 Struktur Packages (MVC)
-<pre>
-src/
-├── main/
-│   └── Main.java → Entry point program (menu utama / View)
-├── service/
-│   └── ManajemenGudang.java → Logika CRUD + Search + Validasi (Controller)
-└── model/
-    └── Barang.java → Struktur data barang (Model)
-</pre>
+<img width="435" height="310" alt="image" src="https://github.com/user-attachments/assets/a8c5ea51-43d3-4ced-9c49-7e53f7d83468" />
 
-# 🧩 Apa itu MVC?
-**MVC (Model-View-Controller)** adalah pola arsitektur yang memisahkan program menjadi tiga bagian utama:  
-- **Model** → Menyimpan data dan aturan bisnis.  
-- **View** → Menangani tampilan / interaksi dengan pengguna.  
-- **Controller** → Mengatur logika program dan menjadi penghubung antara Model dan View.  
 
-Dengan pemisahan ini, program menjadi lebih **terstruktur**, **mudah dirawat**, dan **mudah dikembangkan**.
-
+## ✨ Fitur Utama
+1. **Tambah Barang (Create)** → input ID, nama, stok, lokasi, dan kategori.  
+2. **Lihat Barang (Read)** → menampilkan daftar barang + total barang.  
+3. **Update Barang (Update)** → mengubah data barang tertentu.  
+4. **Hapus Barang (Delete)** → menghapus barang berdasarkan ID.  
+5. **Cari Barang (Search)** → mencari barang berdasarkan ID/nama.  
+6. **Keluar Program** → menghentikan aplikasi.  
 ---
 
-## 📦 Model (`Barang`)
-- Menyimpan data barang berupa **properti**: `idBarang`, `namaBarang`, `stok`, `lokasi`.  
-- Semua properti bersifat **private**.  
-- Disediakan **constructor** untuk inisialisasi, serta **getter & setter** untuk mengakses / mengubah data.  
-- **Tugas utama**: merepresentasikan **struktur data** barang di gudang.
+## 📂 Penjelasan Class
+- **`Barang` (Superclass, package `model`)**  
+  Berisi 4 properti utama: `idBarang`, `namaBarang`, `stok`, `lokasi`.  
+  Dilengkapi getter, setter, constructor, dan method `tampilkanInfo()`.  
 
+- **`Elektronik` (Subclass, package `model`)**  
+  Menambahkan properti `garansiBulan`.  
+  Override `tampilkanInfo()` untuk menampilkan detail garansi.  
+
+- **`Perabot` (Subclass, package `model`)**  
+  Menambahkan properti `bahan`.  
+  Override `tampilkanInfo()` untuk menampilkan detail bahan.  
+
+- **`ManajemenGudang` (Controller, package `service`)**  
+  Menangani logika CRUD, search, validasi input, dan menghitung total barang.  
+  Menggunakan `ArrayList<Barang>` untuk menyimpan data barang.  
+
+- **`Main` (View, package `main`)**  
+  Entry point program.  
+  Menampilkan menu utama dan memanggil method dari `ManajemenGudang`.  
 ---
-
-## 👁️ View (`Main`)
-- Berada di package `main`.  
-- Berfungsi sebagai **entry point** aplikasi.  
-- Isinya hanya **memanggil method `run()`** dari `ManajemenGudang`.  
-- **Tugas utama**: Menjadi penghubung pertama sebelum user diarahkan ke logika Controller.  
-- Semua logika menu & CRUD sudah dipindahkan ke Controller.
-
----
-
-## 🎮 Controller (`ManajemenGudang`)
-- Berada di package `service`.  
-- Menangani seluruh **logika utama program**.  
-- Berfungsi sebagai **penghubung** antara View (`Main`) dengan Model (`Barang`).  
-- **Tugas utama**:
-  - Menampilkan menu utama (switch-case).  
-  - Menangani input user (dengan validasi).  
-  - Menjalankan operasi **CRUD** (Create, Read, Update, Delete).  
-  - Fitur tambahan seperti **Search** dan **Hitung Total Barang**.  
-
-
 
 <details>
   <summary> 🌊 #️⃣ Alur </summary>
