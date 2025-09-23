@@ -80,7 +80,7 @@ Program ini sudah menerapkan:
 Program dimulai dengan tampilan menu swicth case yang mempunyai validasi input user diminta menginput pilihan angka dari 1-6 untuk navigasi.
 
 ---
-## 1️⃣ Create
+##  Create
 Pada menu **Create**, pertama-tama akan ditampilkan daftar barang.  
 User diminta memasukkan **ID barang** → sistem akan mengecek apakah ID sudah ada atau belum.  
 
@@ -89,10 +89,10 @@ User diminta memasukkan **ID barang** → sistem akan mengecek apakah ID sudah a
   - **Elektronik** → memiliki properti *garansi (bulan)*.  
   - **Perabot** → memiliki properti *bahan*.  
 
-✅ Validasi input:  
+Validasi input:  
 - ID tidak boleh kosong/spasi.  
-- Nama/lokasi tidak boleh kosong.  
-- Stok hanya bisa angka bulat positif (tidak boleh negatif/koma).  
+- Nama/lokasi/kategori tidak boleh kosong.  
+- yang tipe data int hanya bisa angka bulat positif (tidak boleh negatif/koma) .  
 
 **Tampilan:**
 
@@ -109,7 +109,7 @@ User diminta memasukkan **ID barang** → sistem akan mengecek apakah ID sudah a
 
 ---
 
-## 2️⃣ Read
+## Read
 Menu **Read** digunakan untuk melihat daftar barang beserta total barang.  
 Sekarang daftar sudah menampilkan kategori masing-masing barang.
 
@@ -120,16 +120,17 @@ Sekarang daftar sudah menampilkan kategori masing-masing barang.
 
 ---
 
-## 3️⃣ Update
+## Update
 Pada menu **Update**, pertama-tama daftar barang akan ditampilkan.  
-User diminta memasukkan **ID barang** → sistem mengecek apakah ID ada atau tidak.  
+User diminta memasukkan **ID barang** → sistem mengecek apakah ID ada atau tidak.
+(sekarang bisa ngubah properti dari kategori barang)
 
 - Jika **ID ada** → lanjut ke tahap pengisian data baru.  
 - Jika **ID tidak ada** → kembali ke menu awal dengan pesan *"Barang tidak ditemukan"*.  
 
-✅ Validasi:  
+ Validasi:  
 - Input kosong → data lama tetap dipakai.  
-- Stok tetap harus angka bulat positif.  
+- tipe data int tetap harus angka bulat positif.  
 
 **Tampilan:**
 
@@ -146,9 +147,10 @@ User diminta memasukkan **ID barang** → sistem mengecek apakah ID ada atau tid
 
 ---
 
-## 4️⃣ Delete
+## 4️ Delete
 Menu **Delete** akan menampilkan daftar barang.  
-User diminta memasukkan **ID barang** yang ingin dihapus.  
+User diminta memasukkan **ID barang** yang ingin dihapus.
+(belum ada perubahan di alurnya kecuali dibagagian lihat barang yang sekarang sudah kelihatan ada kateogori nya)
 
 - Jika **ID ada** → barang dihapus.  
 - Jika **ID tidak ada** → kembali ke menu awal dengan pesan *"Barang tidak ditemukan"*.  
@@ -161,8 +163,9 @@ User diminta memasukkan **ID barang** yang ingin dihapus.
 
 ---
 
-## 5️⃣ Search
-Menu **Search** digunakan untuk mencari barang berdasarkan **ID** atau **Nama**.  
+## 5️ Search
+Menu **Search** digunakan untuk mencari barang berdasarkan **ID** atau **Nama**.
+(belum ada perubahan di alurnya kecuali dibagagian lihat barang yang sekarang sudah kelihatan ada kateogori nya)
 
 - Jika input kosong → kembali ke menu awal dengan pesan *"Kata kunci tidak boleh kosong"*.  
 - Jika ditemukan → tampilkan hasil pencarian.  
@@ -177,7 +180,7 @@ Menu **Search** digunakan untuk mencari barang berdasarkan **ID** atau **Nama**.
 
 ---
 
-## 6️⃣ Exit
+## 6️ Exit
 Menu **Exit** digunakan untuk keluar dari program.  
 
 **Tampilan:**
