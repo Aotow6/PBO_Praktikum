@@ -80,77 +80,107 @@ Program ini sudah menerapkan:
 Program dimulai dengan tampilan menu swicth case yang mempunyai validasi input user diminta menginput pilihan angka dari 1-6 untuk navigasi.
 
 ---
-## 1 / Create
-<img width="482" height="569" alt="image" src="https://github.com/user-attachments/assets/e0a19106-40d1-4b3d-ba6b-ae6d7ec8f94b" />
-<img width="231" height="79" alt="image" src="https://github.com/user-attachments/assets/a67ecab7-3a0f-460b-a661-b689a85a5681" />
+## 1️⃣ Create
+Pada menu **Create**, pertama-tama akan ditampilkan daftar barang.  
+User diminta memasukkan **ID barang** → sistem akan mengecek apakah ID sudah ada atau belum.  
 
-Pada awal pada awal menu create kita akan diperlihatkan daftar barang lalu user diminta memasukan id barang lalu sistem akan mengecek apakah id barang yang di input ini sudah ada di dalam daftar barang atau tidak kalo tidak maka akan lanjut untuk mengisi nama stok dan lokasi dan yang baru ada kategori dan properti dari kategori unstuk sekarang ada garansi buat kategori elektronik dan bahan untuk kategori perabot nah kalau sudah ada maka akan dikembalikan ke menu awal dengan pesan id sudah ada ada juga validasi yang mencegah user untuk mengisi id dengan spasi atau kosong.
+- Jika **ID sudah ada** → kembali ke menu awal dengan pesan *"ID sudah ada"*.  
+- Jika **ID belum ada** → lanjut mengisi `nama`, `stok`, `lokasi`, `kategori`, dan properti dari kategori.  
+  - **Elektronik** → memiliki properti *garansi (bulan)*.  
+  - **Perabot** → memiliki properti *bahan*.  
 
-<img width="353" height="307" alt="image" src="https://github.com/user-attachments/assets/364315bd-4343-484e-a760-19190bc0618d" />
-  <img width="219" height="47" alt="image" src="https://github.com/user-attachments/assets/4aa27f2b-006a-4a3a-ac1b-a66bcb8f7c3a" /> 
-  <img width="265" height="54" alt="image" src="https://github.com/user-attachments/assets/6567359c-dfca-4b77-9314-947c7c52a7c3" /> 
-  <img width="399" height="72" alt="image" src="https://github.com/user-attachments/assets/a1a2e822-6d0c-48fe-8484-1e2f65499f43" />
-<img width="257" height="49" alt="image" src="https://github.com/user-attachments/assets/993eb772-28ab-440d-9057-373185155491" />
-<img width="401" height="89" alt="image" src="https://github.com/user-attachments/assets/aab7b1a5-33a8-435e-8cfe-04380a5d277b" />
-  <br>
-<img width="377" height="228" alt="image" src="https://github.com/user-attachments/assets/f8e6a38c-be2b-4d80-ad91-e8076d2e784c" />
-<img width="360" height="211" alt="image" src="https://github.com/user-attachments/assets/2859f882-4938-4d10-b19e-6e6410157f90" />
+✅ Validasi input:  
+- ID tidak boleh kosong/spasi.  
+- Nama/lokasi tidak boleh kosong.  
+- Stok hanya bisa angka bulat positif (tidak boleh negatif/koma).  
 
+**Tampilan:**
 
-jika id tidak ada dalam daftar barang maka user akan lanjut tahap pengisian data buat barang yaitu nama, stom , lokasi, berserta kategori dan properti dari kategorinya  disini ada validasi yaitu validasi jika input kosong dan untuk yang tipe data int ada validasi yang mencegah user untuk mengiput stok yang ber nilai negatif / koma dan kosong.
-    
----
-## 2 / Read
-<img width="345" height="803" alt="image" src="https://github.com/user-attachments/assets/222c36b2-099e-42db-ae94-89b550ff618a" />
-
-<img width="207" height="63" alt="image" src="https://github.com/user-attachments/assets/854649c0-0943-4bca-83fc-19bb8254feaa" />
-
-
-Disini tempat kita melihat daftar barang dan total barang (sekarang ada kategori nya) .
-
----
-## 3 / Update
-<img width="345" height="803" alt="image" src="https://github.com/user-attachments/assets/1e27ce59-a320-4ac7-8d3f-93a35814cb8b" />
-Pada awal pada awal menu update kita akan diperlihatkan daftar barang lalu user diminta memasukan id barang lalu sistem akan mengecek apakah id barang ada di daftar barang atau tidak kalau ada nanti bakal ke tahap pengisian update baru kalau tidak user akan di kembalikan ke menu awal dengan pesan Barang dengan ID tersebut tidak ditemukan.
-
-<img width="568" height="197" alt="image" src="https://github.com/user-attachments/assets/6feeeedd-07c9-4183-9306-d31314b49535" />
-<img width="269" height="49" alt="image" src="https://github.com/user-attachments/assets/af659082-c6d3-4c96-ba5b-aac58e0d6635" />
-<img width="273" height="42" alt="image" src="https://github.com/user-attachments/assets/f920ccb0-131c-4168-a935-eed6feec0a77" />
-<img width="457" height="50" alt="image" src="https://github.com/user-attachments/assets/029c3c01-3710-4a1d-be08-aab4c87b8282" />
-<img width="524" height="46" alt="image" src="https://github.com/user-attachments/assets/00151bcd-e057-4cb2-a49d-ffdf4faaa053" />
-
-
-
-Di tahap ini user diminta untuk mengisi data baru pada id yang ingin di ubah jika user tapi mengisi kosong/langsung enter maka data tidak akan berubah dan akan tetap sama seperti data lama, terdapat validasi juga disini input tan dengan tipe data int  agar user tidak bisa mengisi negatif atau koma.
-
-Hasil 
-<img width="281" height="179" alt="image" src="https://github.com/user-attachments/assets/9d59354d-030f-4492-90c1-5ae7bf00dcb8" />
-
-
+![Create Menu](https://github.com/user-attachments/assets/e0a19106-40d1-4b3d-ba6b-ae6d7ec8f94b)  
+![Input ID](https://github.com/user-attachments/assets/a67ecab7-3a0f-460b-a661-b689a85a5681)  
+![Validasi ID](https://github.com/user-attachments/assets/364315bd-4343-484e-a760-19190bc0618d)  
+![Input Nama](https://github.com/user-attachments/assets/4aa27f2b-006a-4a3a-ac1b-a66bcb8f7c3a)  
+![Input Stok](https://github.com/user-attachments/assets/6567359c-dfca-4b77-9314-947c7c52a7c3)  
+![Input Lokasi](https://github.com/user-attachments/assets/a1a2e822-6d0c-48fe-8484-1e2f65499f43)  
+![Input Kategori](https://github.com/user-attachments/assets/993eb772-28ab-440d-9057-373185155491)  
+![Properti Elektronik/Perabot](https://github.com/user-attachments/assets/aab7b1a5-33a8-435e-8cfe-04380a5d277b)  
+![Validasi Kosong](https://github.com/user-attachments/assets/f8e6a38c-be2b-4d80-ad91-e8076d2e784c)  
+![Validasi Angka](https://github.com/user-attachments/assets/2859f882-4938-4d10-b19e-6e6410157f90)  
 
 ---
-## 4 / Delete
-<img width="465" height="669" alt="image" src="https://github.com/user-attachments/assets/fd7a686a-05c8-495b-9950-8e0bbfb643fe" /> <br>         
-<img width="439" height="463" alt="image" src="https://github.com/user-attachments/assets/a6e02bc7-f549-4d63-95dc-5350d87c2f1f" /> <img width="309" height="277" alt="image" src="https://github.com/user-attachments/assets/1f277fef-843c-45bd-95ae-b4425fba0f97" />
 
+## 2️⃣ Read
+Menu **Read** digunakan untuk melihat daftar barang beserta total barang.  
+Sekarang daftar sudah menampilkan kategori masing-masing barang.
 
+**Tampilan:**
 
-Setelah menampilkan daftar barang user diminta input id barang yang ingin dihapus dari daftar barang jika user mengisi id yang ada di daftar barang maka barang ttersebut akan di hapus dari daftar barang namun kalo user menginput sesuatu yang  id tidak ada di daftar barang user akan di kembalikan ke menu awal dengan pesan Barang tidak ditemukan (belum ada perubahan di alurnya kecuali dibagagian lihat barang yang sekarang sudah kelihatan ada kateogori nya).
+![Read Menu](https://github.com/user-attachments/assets/222c36b2-099e-42db-ae94-89b550ff618a)  
+![Total Barang](https://github.com/user-attachments/assets/854649c0-0943-4bca-83fc-19bb8254feaa)  
 
 ---
-## 5 / Search
 
-<img width="382" height="248" alt="image" src="https://github.com/user-attachments/assets/d6605979-1d24-49cb-9f39-df421390ae89" /> <br>
-<img width="358" height="276" alt="image" src="https://github.com/user-attachments/assets/47934252-d1d5-4844-ac92-0f9bce812573" />  <img width="377" height="171" alt="image" src="https://github.com/user-attachments/assets/66408e42-3f9d-4a60-a9da-a52655351fe9" /> <br>
+## 3️⃣ Update
+Pada menu **Update**, pertama-tama daftar barang akan ditampilkan.  
+User diminta memasukkan **ID barang** → sistem mengecek apakah ID ada atau tidak.  
 
-<img width="345" height="93" alt="image" src="https://github.com/user-attachments/assets/07d1253c-9de6-4a39-a076-09400b90f10a" />
+- Jika **ID ada** → lanjut ke tahap pengisian data baru.  
+- Jika **ID tidak ada** → kembali ke menu awal dengan pesan *"Barang tidak ditemukan"*.  
 
+✅ Validasi:  
+- Input kosong → data lama tetap dipakai.  
+- Stok tetap harus angka bulat positif.  
 
-user diminta untuk memasukan keyword pencarian berdasarkan id/nama barang jika user meng input kosong maka user akan di kembalikan ke menu awal dengan pesan Kata kunci tidak boleh kosong. Namun jika user mengisi keyword maka sistem akan mencari barang di daftar barang yang di id / nama nya mengandung keyword dan mengembalikan hasilnya namun kalau tidak ditemukan barang yang mengandung keywoard sistem akan mengembalikan pesan barang tidak ditemukan (belum ada perubahan di alurnya kecuali dibagagian lihat barang yang sekarang sudah kelihatan ada kateogori nya).
- 
+**Tampilan:**
+
+![Update Menu](https://github.com/user-attachments/assets/1e27ce59-a320-4ac7-8d3f-93a35814cb8b)  
+![Input ID Update](https://github.com/user-attachments/assets/6feeeedd-07c9-4183-9306-d31314b49535)  
+![Validasi ID Tidak Ada](https://github.com/user-attachments/assets/af659082-c6d3-4c96-ba5b-aac58e0d6635)  
+![Input Nama Update](https://github.com/user-attachments/assets/f920ccb0-131c-4168-a935-eed6feec0a77)  
+![Input Stok Update](https://github.com/user-attachments/assets/029c3c01-3710-4a1d-be08-aab4c87b8282)  
+![Input Lokasi Update](https://github.com/user-attachments/assets/00151bcd-e057-4cb2-a49d-ffdf4faaa053)  
+
+**Hasil:**
+
+![Update Result](https://github.com/user-attachments/assets/9d59354d-030f-4492-90c1-5ae7bf00dcb8)  
+
 ---
-## 6 / Exit
-<img width="395" height="233" alt="image" src="https://github.com/user-attachments/assets/6cf874d8-7003-418b-a314-51ebff3f35ea" />
 
-Keluar dari program.
+## 4️⃣ Delete
+Menu **Delete** akan menampilkan daftar barang.  
+User diminta memasukkan **ID barang** yang ingin dihapus.  
+
+- Jika **ID ada** → barang dihapus.  
+- Jika **ID tidak ada** → kembali ke menu awal dengan pesan *"Barang tidak ditemukan"*.  
+
+**Tampilan:**
+
+![Delete Menu](https://github.com/user-attachments/assets/fd7a686a-05c8-495b-9950-8e0bbfb643fe)  
+![Delete Confirm](https://github.com/user-attachments/assets/a6e02bc7-f549-4d63-95dc-5350d87c2f1f)  
+![Delete Result](https://github.com/user-attachments/assets/1f277fef-843c-45bd-95ae-b4425fba0f97)  
+
+---
+
+## 5️⃣ Search
+Menu **Search** digunakan untuk mencari barang berdasarkan **ID** atau **Nama**.  
+
+- Jika input kosong → kembali ke menu awal dengan pesan *"Kata kunci tidak boleh kosong"*.  
+- Jika ditemukan → tampilkan hasil pencarian.  
+- Jika tidak ditemukan → tampil pesan *"Barang tidak ditemukan"*.  
+
+**Tampilan:**
+
+![Search Input](https://github.com/user-attachments/assets/d6605979-1d24-49cb-9f39-df421390ae89)  
+![Search Result](https://github.com/user-attachments/assets/47934252-d1d5-4844-ac92-0f9bce812573)  
+![Search Hasil 2](https://github.com/user-attachments/assets/66408e42-3f9d-4a60-a9da-a52655351fe9)  
+![Search Error](https://github.com/user-attachments/assets/07d1253c-9de6-4a39-a076-09400b90f10a)  
+
+---
+
+## 6️⃣ Exit
+Menu **Exit** digunakan untuk keluar dari program.  
+
+**Tampilan:**
+
+![Exit Menu](https://github.com/user-attachments/assets/6cf874d8-7003-418b-a314-51ebff3f35ea) 
 </details>
