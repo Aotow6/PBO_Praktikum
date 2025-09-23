@@ -22,7 +22,19 @@ Program ini sudah menerapkan:
 ## 📂 Struktur Packages (MVC)
 <img width="435" height="310" alt="image" src="https://github.com/user-attachments/assets/a8c5ea51-43d3-4ced-9c49-7e53f7d83468" />
 
-
+## 🆕 Apa Yang Baru?
+- **Inheritance & Overriding**:  
+  - Subclass `Elektronik` dengan properti tambahan `garansiBulan`.  
+  - Subclass `Perabot` dengan properti tambahan `bahan`.  
+  - Keduanya override method `tampilkanInfo()`.  
+- Menerapkan **Validasi input  di setter** → data lebih aman dari manipulasi langsung.  
+- **Method bantu `cariById()`** untuk mempermudah pencarian barang saat update/hapus.  
+- **Properti `totalBarang`** untuk menghitung jumlah barang di gudang.
+- Penyesuaian **Tambah Barang (Create)** menambahkan kategori dan properti nya.   
+- Penyesuaian **Lihat Barang (Read)** Memperlihatkan kategori dan properti nya. 
+- Penyesuaian **Update Barang (Update)** dapat mengubah properti dari kategori.
+- Penggunaan **Iterator pada Hapus Barang (Delete)** dalam mengantisipasi jika kedepanya akan semakin banyak data dan memerlukan method yang menghapus banyak data barang secara sekaligus.
+  ---
 ## ✨ Fitur Utama
 1. **Tambah Barang (Create)** → input ID, nama, stok, lokasi, dan kategori.  
 2. **Lihat Barang (Read)** → menampilkan daftar barang + total barang.  
