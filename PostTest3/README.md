@@ -135,7 +135,7 @@ Hasil
 
 
 
-Setelah menampilkan daftar barang user diminta input id barang yang ingin dihapus dari daftar barang jika user mengisi id yang ada di daftar barang maka barang ttersebut akan di hapus dari daftar barang namun kalo user menginput sesuatu yang  id tidak ada di daftar barang user akan di kembalikan ke menu awal dengan pesan Barang tidak ditemukan (belum ada perubahan di alurnya).
+Setelah menampilkan daftar barang user diminta input id barang yang ingin dihapus dari daftar barang jika user mengisi id yang ada di daftar barang maka barang ttersebut akan di hapus dari daftar barang namun kalo user menginput sesuatu yang  id tidak ada di daftar barang user akan di kembalikan ke menu awal dengan pesan Barang tidak ditemukan (belum ada perubahan di alurnya kecuali dibagagian lihat barang yang sekarang sudah kelihatan ada kateogori nya).
 
 ---
 ## 5 / Search
@@ -146,7 +146,7 @@ Setelah menampilkan daftar barang user diminta input id barang yang ingin dihapu
 <img width="345" height="93" alt="image" src="https://github.com/user-attachments/assets/07d1253c-9de6-4a39-a076-09400b90f10a" />
 
 
-user diminta untuk memasukan keyword pencarian berdasarkan id/nama barang jika user meng input kosong maka user akan di kembalikan ke menu awal dengan pesan Kata kunci tidak boleh kosong. Namun jika user mengisi keyword maka sistem akan mencari barang di daftar barang yang di id / nama nya mengandung keyword dan mengembalikan hasilnya namun kalau tidak ditemukan barang yang mengandung keywoard sistem akan mengembalikan pesan barang tidak ditemukan (belum ada perubahan di alurnya).
+user diminta untuk memasukan keyword pencarian berdasarkan id/nama barang jika user meng input kosong maka user akan di kembalikan ke menu awal dengan pesan Kata kunci tidak boleh kosong. Namun jika user mengisi keyword maka sistem akan mencari barang di daftar barang yang di id / nama nya mengandung keyword dan mengembalikan hasilnya namun kalau tidak ditemukan barang yang mengandung keywoard sistem akan mengembalikan pesan barang tidak ditemukan (belum ada perubahan di alurnya kecuali dibagagian lihat barang yang sekarang sudah kelihatan ada kateogori nya).
  
 ---
 ## 6 / Exit
