@@ -35,8 +35,7 @@ Program ini sudah menerapkan:
   - **Overloading**:  
     - `cariBarang(String keyword)` → mencari berdasarkan ID atau nama.  
     - `cariBarang(int minStok)` → mencari berdasarkan minimal stok.
-- **Cari**
-- Method cari diperbarui dalam penerapan overload cariBarang(String keyword) dan cariBarang(int ).
+- **Cari** Method cari diperbarui dalam penerapan overload cariBarang(String keyword) dan cariBarang(int ).
   ---
 ## ✨ Fitur Utama
 1. **Tambah Barang (Create)** → input ID, nama, stok, lokasi, dan kategori.  
@@ -189,7 +188,7 @@ Menu **Search** digunakan untuk mencari barang berdasarkan **ID** atau **Nama**.
 <img width="413" height="305" alt="image" src="https://github.com/user-attachments/assets/5651c565-1b08-424a-b5e7-41cc61dfa3c1" />
 <img width="463" height="656" alt="image" src="https://github.com/user-attachments/assets/33a1d0cf-9f15-410e-b33f-f44b278d1995" />
 <img width="477" height="642" alt="image" src="https://github.com/user-attachments/assets/ad427ff7-3479-461b-b086-103fb3cbeeb0" />
-![Search Error](https://github.com/user-attachments/assets/07d1253c-9de6-4a39-a076-09400b90f10a)  
+<img width="228" height="82" alt="image" src="https://github.com/user-attachments/assets/21cba3b5-c6d2-41ff-8bd9-b7746cd3d561" />
 
 ---
 
