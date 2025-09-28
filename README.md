@@ -4,8 +4,8 @@ NIM: 2409116067\
 Tema: Inventaris Gudang
 
 # Deskripsi
-Program ini adalah aplikasi sederhana untuk **manajemen inventaris gudang** menggunakan bahasa pemrograman Java.  
-Fungsinya untuk melakukan operasi dasar **CRUD (Create, Read, Update, Delete)** terhadap data barang.  
+Program ini merupakan sistem inventaris gudang berbasis Java yang mengimplementasikan konsep **OOP (Object-Oriented Programming)** secara menyeluruh. Program memungkinkan pengguna untuk mengelola data barang melalui fitur CRUD (Create, Read, Update, Delete), pencarian, validasi input, serta penerapan konsep lanjutan seperti **Encapsulation, Inheritance, Polymorphism, Abstraction, Interface, dan Overloading.**
+
 
 Program ini sudah menerapkan:
 - **Encapsulation** (getter & setter untuk proteksi data)  
@@ -20,50 +20,63 @@ Program ini sudah menerapkan:
 ---
 
 ## 📂 Struktur Packages (MVC)
-<img width="435" height="310" alt="image" src="https://github.com/user-attachments/assets/a8c5ea51-43d3-4ced-9c49-7e53f7d83468" />
+<img width="608" height="252" alt="image" src="https://github.com/user-attachments/assets/a0d33761-01ef-47ac-b90c-b2d70e4cbec3" />
 
 ## 🆕 Apa Yang Baru?
-- **Inheritance & Overriding**:  
-  - Subclass `Elektronik` dengan properti tambahan `garansiBulan`.  
-  - Subclass `Perabot` dengan properti tambahan `bahan`.  
-  - Keduanya override method `tampilkanInfo()`.  
-- Menerapkan **Validasi input  di setter** → data lebih aman dari manipulasi langsung.  
-- **Method bantu `cariById()`** untuk mempermudah pencarian barang saat update/hapus.  
-- **Properti `totalBarang`** untuk menghitung jumlah barang di gudang.
-- Penyesuaian **Tambah Barang (Create)** menambahkan kategori dan properti nya.   
-- Penyesuaian **Lihat Barang (Read)** Memperlihatkan kategori dan properti nya. 
-- Penyesuaian **Update Barang (Update)** dapat mengubah properti dari kategori.
-- Penggunaan **Iterator pada Hapus Barang (Delete)** dalam mengantisipasi jika kedepanya akan semakin banyak data dan memerlukan method yang menghapus banyak data barang secara sekaligus.
+- **Abstraction**  
+  - `Barang` kini menjadi **abstract class** yang tidak bisa di-instantiate langsung.  
+  - Memastikan setiap subclass wajib mengimplementasikan method `tampilkanInfo()`.  
+
+- **Interface**  
+  - Interface `Categorizable` digunakan untuk menampilkan kategori barang secara konsisten.
+
+- **Polymorphism**  
+  - **Overriding**: Method `tampilkanInfo()` dioverride di `Elektronik` & `Perabot`.  
+  - **Overloading**:  
+    - `cariBarang(String keyword)` → mencari berdasarkan ID atau nama.  
+    - `cariBarang(int minStok)` → mencari berdasarkan minimal stok.
+- **Cari**
+- Method cari diperbarui dalam penerapan overload cariBarang(String keyword) dan cariBarang(int ).
   ---
 ## ✨ Fitur Utama
 1. **Tambah Barang (Create)** → input ID, nama, stok, lokasi, dan kategori.  
 2. **Lihat Barang (Read)** → menampilkan daftar barang + total barang.  
 3. **Update Barang (Update)** → mengubah data barang tertentu.  
 4. **Hapus Barang (Delete)** → menghapus barang berdasarkan ID.  
-5. **Cari Barang (Search)** → mencari barang berdasarkan ID/nama.  
+5. **Cari Barang (Search)** → Mencari berdasarkan ID/nama atau berdasarkan minimal stok (**Overloading**).    
 6. **Keluar Program** → menghentikan aplikasi.  
 ---
 
 ## 📂 Penjelasan Class
-- **`Barang` (Superclass, package `model`)**  
-  Berisi 4 properti utama: `idBarang`, `namaBarang`, `stok`, `lokasi`.  
-  Dilengkapi getter, setter, constructor, dan method `tampilkanInfo()`.  
 
-- **`Elektronik` (Subclass, package `model`)**  
-  Menambahkan properti `garansiBulan`.  
-  Override `tampilkanInfo()` untuk menampilkan detail garansi.  
+### 🧱 `Barang` *(Abstract Class)*  
+- Superclass dari semua jenis barang.  
+- Memiliki properti dasar:  
+  - `idBarang`, `namaBarang`, `stok`, `lokasi`  
+- Menerapkan **Encapsulation** (getter & setter) dan mendefinisikan `tampilkanInfo()` sebagai abstract method.
 
-- **`Perabot` (Subclass, package `model`)**  
-  Menambahkan properti `bahan`.  
-  Override `tampilkanInfo()` untuk menampilkan detail bahan.  
+### ⚡ `Elektronik` *(Subclass)*  
+- Mewarisi `Barang` dan menambahkan properti: `garansiBulan`.  
+- Override `tampilkanInfo()` untuk menampilkan detail elektronik.  
+- Mengimplementasikan interface `Categorizable`.
 
-- **`ManajemenGudang` (Controller, package `service`)**  
-  Menangani logika CRUD, search, validasi input, dan menghitung total barang.  
-  Menggunakan `ArrayList<Barang>` untuk menyimpan data barang.  
+### 🪑 `Perabot` *(Subclass)*  
+- Mewarisi `Barang` dan menambahkan properti: `bahan`.  
+- Override `tampilkanInfo()` untuk menampilkan detail perabot.  
+- Mengimplementasikan interface `Categorizable`.
 
-- **`Main` (View, package `main`)**  
-  Entry point program.  
-  Menampilkan menu utama dan memanggil method dari `ManajemenGudang`.  
+### 🔎 `ManajemenGudang` *(Controller)*  
+- Berisi seluruh logika CRUD dan pencarian barang.  
+- Menangani validasi input, total barang, serta pencarian dengan **Overloading**.  
+
+### 🖥️ `Main` *(View)*  
+- Menyediakan tampilan menu utama dan menghubungkan pengguna dengan controller.  
+- Menggunakan `switch-case` untuk navigasi fitur.
+
+### 🏷️ `Categorizable` *(Interface)*  
+- Interface sederhana yang mendefinisikan method `getKategori()`.  
+- Dipakai oleh subclass (`Elektronik`, `Perabot`) untuk menampilkan kategori masing-masing.  
+- Membantu menjaga konsistensi informasi kategori antar jenis barang.
 ---
 
 <details>
@@ -173,9 +186,9 @@ Menu **Search** digunakan untuk mencari barang berdasarkan **ID** atau **Nama**.
 
 **Tampilan:**
 
-![Search Input](https://github.com/user-attachments/assets/d6605979-1d24-49cb-9f39-df421390ae89)  
-![Search Result](https://github.com/user-attachments/assets/47934252-d1d5-4844-ac92-0f9bce812573)  
-![Search Hasil 2](https://github.com/user-attachments/assets/66408e42-3f9d-4a60-a9da-a52655351fe9)  
+<img width="413" height="305" alt="image" src="https://github.com/user-attachments/assets/5651c565-1b08-424a-b5e7-41cc61dfa3c1" />
+<img width="463" height="656" alt="image" src="https://github.com/user-attachments/assets/33a1d0cf-9f15-410e-b33f-f44b278d1995" />
+<img width="477" height="642" alt="image" src="https://github.com/user-attachments/assets/ad427ff7-3479-461b-b086-103fb3cbeeb0" />
 ![Search Error](https://github.com/user-attachments/assets/07d1253c-9de6-4a39-a076-09400b90f10a)  
 
 ---
