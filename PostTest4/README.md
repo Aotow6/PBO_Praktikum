@@ -4,568 +4,199 @@ NIM: 2409116067\
 Tema: Inventaris Gudang
 
 # Deskripsi
-Program Sederhana manajemen gudang yang untuk sekarang hanya bisa CRUD tapi memili security yang cukup lengkap
- # Source Code
+Program ini merupakan sistem inventaris gudang berbasis Java yang mengimplementasikan konsep **OOP (Object-Oriented Programming)** secara menyeluruh. Program memungkinkan pengguna untuk mengelola data barang melalui fitur CRUD (Create, Read, Update, Delete), pencarian, validasi input, serta penerapan konsep lanjutan seperti **Encapsulation, Inheritance, Polymorphism, Abstraction, Interface, dan Overloading.**
+
+
+Program ini sudah menerapkan:
+- **Encapsulation** (getter & setter untuk proteksi data)  
+- **Inheritance** (superclass `Barang`, subclass `Elektronik` & `Perabot`)  
+- **Overriding** (method `tampilkanInfo()` dioverride di subclass)  
+- **Validasi input** (mencegah data kosong, negatif, atau duplikat)  
+- **Struktur MVC sederhana** dengan pemisahan package:  
+  - `model` → struktur data  
+  - `service` → logika program (Controller)  
+  - `main` → tampilan menu (View)
+
+---
+
+## 📂 Struktur Packages (MVC)
+<img width="608" height="252" alt="image" src="https://github.com/user-attachments/assets/a0d33761-01ef-47ac-b90c-b2d70e4cbec3" />
+
+## 🆕 Apa Yang Baru?
+- **Abstraction**  
+  - `Barang` kini menjadi **abstract class** yang tidak bisa di-instantiate langsung.  
+  - Memastikan setiap subclass wajib mengimplementasikan method `tampilkanInfo()`.  
+
+- **Interface**  
+  - Interface `Categorizable` digunakan untuk menampilkan kategori barang secara konsisten.
+
+- **Polymorphism**  
+  - **Overriding**: Method `tampilkanInfo()` dioverride di `Elektronik` & `Perabot`.  
+  - **Overloading**:  
+    - `cariBarang(String keyword)` → mencari berdasarkan ID atau nama.  
+    - `cariBarang(int minStok)` → mencari berdasarkan minimal stok.
+- **Cari** Method cari diperbarui dalam penerapan overload cariBarang(String keyword) dan cariBarang(int ).
+  ---
+## ✨ Fitur Utama
+1. **Tambah Barang (Create)** → input ID, nama, stok, lokasi, dan kategori.  
+2. **Lihat Barang (Read)** → menampilkan daftar barang + total barang.  
+3. **Update Barang (Update)** → mengubah data barang tertentu.  
+4. **Hapus Barang (Delete)** → menghapus barang berdasarkan ID.  
+5. **Cari Barang (Search)** → Mencari berdasarkan ID/nama atau berdasarkan minimal stok (**Overloading**).    
+6. **Keluar Program** → menghentikan aplikasi.  
+---
+
+## 📂 Penjelasan Class
+
+### 🧱 `Barang` *(Abstract Class)*  
+- Superclass dari semua jenis barang.  
+- Memiliki properti dasar:  
+  - `idBarang`, `namaBarang`, `stok`, `lokasi`  
+- Menerapkan **Encapsulation** (getter & setter) dan mendefinisikan `tampilkanInfo()` sebagai abstract method.
+
+### ⚡ `Elektronik` *(Subclass)*  
+- Mewarisi `Barang` dan menambahkan properti: `garansiBulan`.  
+- Override `tampilkanInfo()` untuk menampilkan detail elektronik.  
+- Mengimplementasikan interface `Categorizable`.
+
+### 🪑 `Perabot` *(Subclass)*  
+- Mewarisi `Barang` dan menambahkan properti: `bahan`.  
+- Override `tampilkanInfo()` untuk menampilkan detail perabot.  
+- Mengimplementasikan interface `Categorizable`.
+
+### 🔎 `ManajemenGudang` *(Controller)*  
+- Berisi seluruh logika CRUD dan pencarian barang.  
+- Menangani validasi input, total barang, serta pencarian dengan **Overloading**.  
+
+### 🖥️ `Main` *(View)*  
+- Menyediakan tampilan menu utama dan menghubungkan pengguna dengan controller.  
+- Menggunakan `switch-case` untuk navigasi fitur.
+
+### 🏷️ `Categorizable` *(Interface)*  
+- Interface sederhana yang mendefinisikan method `getKategori()`.  
+- Dipakai oleh subclass (`Elektronik`, `Perabot`) untuk menampilkan kategori masing-masing.  
+- Membantu menjaga konsistensi informasi kategori antar jenis barang.
+---
+
 <details>
-  <summary> 🧑🏿‍💻 #️⃣ Source Code </summary>
- 
+  <summary> 🌊 #️⃣ Alur </summary>
 
-  
-## Main.java/PostTest1
-```java
-package com.mycompany.posttest1;
+## Menu Awal
+  <img width="359" height="292" alt="image" src="https://github.com/user-attachments/assets/90205372-8a02-4f58-907f-4ca622d43cee" /> 
+<img width="377" height="237" alt="image" src="https://github.com/user-attachments/assets/8e6d4694-db16-4a06-acad-06db3fd8b241" /> 
 
 
 
-import java.util.Scanner;
-import java.util.ArrayList;
 
 
-public class PostTest1 {
+Program dimulai dengan tampilan menu swicth case yang mempunyai validasi input user diminta menginput pilihan angka dari 1-6 untuk navigasi.
 
-    public static void main(String[] args) {      
-Scanner input = new Scanner(System.in);
+---
+##  Create
+Pada menu **Create**, pertama-tama akan ditampilkan daftar barang.  
+User diminta memasukkan **ID barang** → sistem akan mengecek apakah ID sudah ada atau belum.  
 
-        ArrayList<String[]> daftarBarang = new ArrayList<>();
+- Jika **ID sudah ada** → kembali ke menu awal dengan pesan *"ID sudah ada"*.  
+- Jika **ID belum ada** → lanjut mengisi `nama`, `stok`, `lokasi`, `kategori`, dan properti dari kategori.  
+  - **Elektronik** → memiliki properti *garansi (bulan)*.  
+  - **Perabot** → memiliki properti *bahan*.  
 
-        // Data dummy awal
-        daftarBarang.add(new String[]{"B001", "Laptop", "10", "Rak A"});
-        daftarBarang.add(new String[]{"B002", "Printer", "5", "Rak B"});
+Validasi input:  
+- ID tidak boleh kosong/spasi.  
+- Nama/lokasi/kategori tidak boleh kosong.  
+- yang tipe data int hanya bisa angka bulat positif (tidak boleh negatif/koma) .  
 
-        boolean jalan = true;
-        while (jalan) {
-            System.out.println("\n+====== MENU INVENTARIS GUDANG ======+");
-            System.out.println("|   1. Tambah Barang                 |");
-            System.out.println("|   2. Lihat Daftar Barang           |");
-            System.out.println("|   3. Update Barang                 |");
-            System.out.println("|   4. Hapus Barang                  |");
-            System.out.println("|   5. Keluar                        |");
-            System.out.println("+====================================+");
-            System.out.print("Pilih menu: ");
+**Tampilan:**
 
-            if (!input.hasNextInt()) {
-                System.out.println("Input menu harus berupa angka!");
-                input.nextLine();
-                continue;
-            }
-            int pilihan = input.nextInt();
-            input.nextLine(); 
+![Create Menu](https://github.com/user-attachments/assets/e0a19106-40d1-4b3d-ba6b-ae6d7ec8f94b)  
+![Input ID](https://github.com/user-attachments/assets/a67ecab7-3a0f-460b-a661-b689a85a5681)  
+![Validasi ID](https://github.com/user-attachments/assets/364315bd-4343-484e-a760-19190bc0618d)  
+![Input Nama](https://github.com/user-attachments/assets/4aa27f2b-006a-4a3a-ac1b-a66bcb8f7c3a)  
+![Input Stok](https://github.com/user-attachments/assets/6567359c-dfca-4b77-9314-947c7c52a7c3)  
+![Input Lokasi](https://github.com/user-attachments/assets/a1a2e822-6d0c-48fe-8484-1e2f65499f43)  
+![Input Kategori](https://github.com/user-attachments/assets/993eb772-28ab-440d-9057-373185155491)  
+![Properti Elektronik/Perabot](https://github.com/user-attachments/assets/aab7b1a5-33a8-435e-8cfe-04380a5d277b)  
+![Validasi Kosong](https://github.com/user-attachments/assets/f8e6a38c-be2b-4d80-ad91-e8076d2e784c)  
+![Validasi Angka](https://github.com/user-attachments/assets/2859f882-4938-4d10-b19e-6e6410157f90)  
 
-            switch (pilihan) {
-                case 1: // Create
-                      if (daftarBarang.isEmpty()) {
-                        System.out.println("Daftar barang masih kosong.");
-                    } else {
-                        System.out.println("\n===== DAFTAR BARANG =====");
-                        for (int i = 0; i < daftarBarang.size(); i++) {
-                            String[] b = daftarBarang.get(i);
-                            System.out.println("ID Barang : " + b[0]);
-                            System.out.println("Nama      : " + b[1]);
-                            System.out.println("Stok      : " + b[2]);
-                            System.out.println("Lokasi    : " + b[3]);
-                            System.out.println("------------------------------");
-                        }
-                    }
-                    System.out.print("Masukkan ID Barang   : ");
-                    String id = input.nextLine();
+---
 
-                    boolean ada = false;
-                    for (int i = 0; i < daftarBarang.size(); i++) {
-                        if (daftarBarang.get(i)[0].equalsIgnoreCase(id)) {
-                            ada = true;
-                            break;
-                        }
-                    }
+## Read
+Menu **Read** digunakan untuk melihat daftar barang beserta total barang.  
+Sekarang daftar sudah menampilkan kategori masing-masing barang.
 
-                    if (ada) {
-                        System.out.println("Gagal menambahkan. ID Barang \"" + id + "\" sudah ada.");
-                    } else {
-                        System.out.print("Masukkan Nama Barang : ");
-                        String nama = input.nextLine();
-                        if (nama.trim().isEmpty()) {
-                            System.out.println("Nama barang tidak boleh kosong.");
-                            break;
-                        }
+**Tampilan:**
 
-                        System.out.print("Masukkan Stok        : ");
-                        if (!input.hasNextInt()) {
-                            System.out.println("Stok harus berupa angka!");
-                            input.nextLine();
-                            break;
-                        }
-                        int stok = input.nextInt();
-                        input.nextLine();
-                        if (stok < 0) {
-                            System.out.println("Stok tidak boleh negatif.");
-                            break;
-                        }
+![Read Menu](https://github.com/user-attachments/assets/222c36b2-099e-42db-ae94-89b550ff618a)  
+![Total Barang](https://github.com/user-attachments/assets/854649c0-0943-4bca-83fc-19bb8254feaa)  
 
-                        System.out.print("Masukkan Lokasi      : ");
-                        String lokasi = input.nextLine();
-                        if (lokasi.trim().isEmpty()) {
-                            System.out.println("Lokasi tidak boleh kosong.");   
-                            break;
-                        }
+---
 
-                        String[] barang = {id, nama, String.valueOf(stok), lokasi};
-                        daftarBarang.add(barang);
+## Update
+Pada menu **Update**, pertama-tama daftar barang akan ditampilkan.  
+User diminta memasukkan **ID barang** → sistem mengecek apakah ID ada atau tidak.
+(sekarang bisa ngubah properti dari kategori barang)
 
-                        System.out.println("Barang berhasil ditambahkan.");
-                    }
-                    break;
+- Jika **ID ada** → lanjut ke tahap pengisian data baru.  
+- Jika **ID tidak ada** → kembali ke menu awal dengan pesan *"Barang tidak ditemukan"*.  
 
-                case 2: // Read
-                    if (daftarBarang.isEmpty()) {
-                        System.out.println("Daftar barang masih kosong.");
-                    } else {
-                        System.out.println("\n===== DAFTAR BARANG =====");
-                        for (int i = 0; i < daftarBarang.size(); i++) {
-                            String[] b = daftarBarang.get(i);
-                            System.out.println("ID Barang : " + b[0]);
-                            System.out.println("Nama      : " + b[1]);
-                            System.out.println("Stok      : " + b[2]);
-                            System.out.println("Lokasi    : " + b[3]);
-                            System.out.println("------------------------------");
-                        }
-                    }
-                    break;
+ Validasi:  
+- Input kosong → data lama tetap dipakai.  
+- tipe data int tetap harus angka bulat positif.  
 
-                case 3: // Update
-                      if (daftarBarang.isEmpty()) {
-                        System.out.println("Daftar barang masih kosong.");
-                    } else {
-                        System.out.println("\n===== DAFTAR BARANG =====");
-                        for (int i = 0; i < daftarBarang.size(); i++) {
-                            String[] b = daftarBarang.get(i);
-                            System.out.println("ID Barang : " + b[0]);
-                            System.out.println("Nama      : " + b[1]);
-                            System.out.println("Stok      : " + b[2]);
-                            System.out.println("Lokasi    : " + b[3]);
-                            System.out.println("------------------------------");
-                        }
-                    }
-                    System.out.print("Masukkan ID Barang yang akan diupdate: ");
-                    String idCari = input.nextLine();
-                    boolean ditemukan = false;
+**Tampilan:**
 
-                    for (int i = 0; i < daftarBarang.size(); i++) {
-                        String[] b = daftarBarang.get(i);
-                        if (b[0].equalsIgnoreCase(idCari)) {
-                            ditemukan = true;
-                            System.out.println("Data ditemukan. Silakan masukkan data baru:");
+![Update Menu](https://github.com/user-attachments/assets/1e27ce59-a320-4ac7-8d3f-93a35814cb8b)  
+![Input ID Update](https://github.com/user-attachments/assets/6feeeedd-07c9-4183-9306-d31314b49535)  
+![Validasi ID Tidak Ada](https://github.com/user-attachments/assets/af659082-c6d3-4c96-ba5b-aac58e0d6635)  
+![Input Nama Update](https://github.com/user-attachments/assets/f920ccb0-131c-4168-a935-eed6feec0a77)  
+![Input Stok Update](https://github.com/user-attachments/assets/029c3c01-3710-4a1d-be08-aab4c87b8282)  
+![Input Lokasi Update](https://github.com/user-attachments/assets/00151bcd-e057-4cb2-a49d-ffdf4faaa053)  
 
-                            System.out.print("Nama Barang baru (lama: " + b[1] + "): ");
-                            String namaBaru = input.nextLine();
-                            if (namaBaru.trim().isEmpty()) {
-                                System.out.println("Nama barang tidak boleh kosong.");
-                                break;
-                            }
+**Hasil:**
 
-                            System.out.print("Stok baru (lama: " + b[2] + "): ");
-                            if (!input.hasNextInt()) {
-                                System.out.println("Stok harus berupa angka!");
-                                input.nextLine();
-                                break;
-                            }
-                            int stokBaru = input.nextInt();
-                            input.nextLine();
-                            if (stokBaru < 0) {
-                                System.out.println("Stok tidak boleh negatif.");
-                                break;
-                            }
+![Update Result](https://github.com/user-attachments/assets/9d59354d-030f-4492-90c1-5ae7bf00dcb8)  
 
-                            System.out.print("Lokasi baru (lama: " + b[3] + "): ");
-                            String lokasiBaru = input.nextLine();
-                            if (lokasiBaru.trim().isEmpty()) {
-                                System.out.println("Lokasi tidak boleh kosong.");
-                                break;
-                            }
+---
 
-                            b[1] = namaBaru;
-                            b[2] = String.valueOf(stokBaru);
-                            b[3] = lokasiBaru;
+## 4️ Delete
+Menu **Delete** akan menampilkan daftar barang.  
+User diminta memasukkan **ID barang** yang ingin dihapus.
+(belum ada perubahan di alurnya kecuali dibagagian lihat barang yang sekarang sudah kelihatan ada kateogori nya)
 
-                            System.out.println("Data barang berhasil diperbarui.");
-                            break;
-                        }
-                    }
+- Jika **ID ada** → barang dihapus.  
+- Jika **ID tidak ada** → kembali ke menu awal dengan pesan *"Barang tidak ditemukan"*.  
 
-                    if (!ditemukan) {
-                        System.out.println("Barang dengan ID tersebut tidak ditemukan.");
-                    }
-                    break;
+**Tampilan:**
 
-                case 4: // Delete
-                      if (daftarBarang.isEmpty()) {
-                        System.out.println("Daftar barang masih kosong.");
-                    } else {
-                        System.out.println("\n===== DAFTAR BARANG =====");
-                        for (int i = 0; i < daftarBarang.size(); i++) {
-                            String[] b = daftarBarang.get(i);
-                            System.out.println("ID Barang : " + b[0]);
-                            System.out.println("Nama      : " + b[1]);
-                            System.out.println("Stok      : " + b[2]);
-                            System.out.println("Lokasi    : " + b[3]);
-                            System.out.println("------------------------------");
-                        }
-                    }
-                    System.out.print("Masukkan ID Barang yang akan dihapus: ");
-                    String idHapus = input.nextLine();
-                    boolean terhapus = false;
+![Delete Menu](https://github.com/user-attachments/assets/fd7a686a-05c8-495b-9950-8e0bbfb643fe)  
+![Delete Confirm](https://github.com/user-attachments/assets/a6e02bc7-f549-4d63-95dc-5350d87c2f1f)  
+![Delete Result](https://github.com/user-attachments/assets/1f277fef-843c-45bd-95ae-b4425fba0f97)  
 
-                    for (int i = 0; i < daftarBarang.size(); i++) {
-                        if (daftarBarang.get(i)[0].equalsIgnoreCase(idHapus)) {
-                            daftarBarang.remove(i);
-                            terhapus = true;
-                            System.out.println("Barang berhasil dihapus.");
-                            break;
-                        }
-                    }
+---
 
-                    if (!terhapus) {
-                        System.out.println("Barang dengan ID tersebut tidak ditemukan.");
-                    }
-                    break;
+## 5️ Search
+Menu **Search** digunakan untuk mencari barang berdasarkan **ID** atau **Nama**.
+Sekarang Search memilikin menu yang menggunakan switch case yaitu pilihan 1 untuk melakukan pilihan berdasarkan ID/Nama  dan 2 untuk melakukan pencarian berdasarkan minimal Stok dari barang.
 
-                case 5: // Keluar
-                    System.out.println("Terima kasih, program selesai.");
-                    jalan = false;
-                    break;
 
-                default:
-                    System.out.println("Pilihan tidak valid, coba lagi.");
-            }
-        }
+- Jika input kosong/invalid → kembali ke menu awal dengan sebuah pesan.  
+- Jika ditemukan → tampilkan hasil pencarian.  
+- Jika tidak ditemukan → tampil pesan *"Barang tidak ditemukan"*.  
 
-        input.close();
-        }
-}
-```
+**Tampilan:**
+
+<img width="413" height="305" alt="image" src="https://github.com/user-attachments/assets/5651c565-1b08-424a-b5e7-41cc61dfa3c1" />
+<img width="463" height="656" alt="image" src="https://github.com/user-attachments/assets/33a1d0cf-9f15-410e-b33f-f44b278d1995" />
+<img width="477" height="642" alt="image" src="https://github.com/user-attachments/assets/ad427ff7-3479-461b-b086-103fb3cbeeb0" />
+<img width="228" height="82" alt="image" src="https://github.com/user-attachments/assets/21cba3b5-c6d2-41ff-8bd9-b7746cd3d561" />
+
+---
+
+## 6️ Exit
+Menu **Exit** digunakan untuk keluar dari program.  
+
+**Tampilan:**
+
+![Exit Menu](https://github.com/user-attachments/assets/6cf874d8-7003-418b-a314-51ebff3f35ea) 
 </details>
-<details>
-  <summary> ✍🏿🥸 Penjelasan kode </summary>
- 
-## Package yang dipakai
-``` java
-import java.util.Scanner;
-import java.util.ArrayList;
-```
-java.util.Scanner  digunakan untuk menerima input dari user melalui keyboard.
-
-java.util.ArrayList  digunakan untuk menyimpan data barang dalam bentuk list dinamis (bisa bertambah & berkurang).
-
-## Menu Awal & Array List
-```java
-
-        ArrayList<String[]> daftarBarang = new ArrayList<>();
-
-        // Data dummy awal
-        daftarBarang.add(new String[]{"B001", "Laptop", "10", "Rak A"});
-        daftarBarang.add(new String[]{"B002", "Printer", "5", "Rak B"});
-
-        boolean jalan = true;
-        while (jalan) {
-            System.out.println("\n+====== MENU INVENTARIS GUDANG ======+");
-            System.out.println("|   1. Tambah Barang                 |");
-            System.out.println("|   2. Lihat Daftar Barang           |");
-            System.out.println("|   3. Update Barang                 |");
-            System.out.println("|   4. Hapus Barang                  |");
-            System.out.println("|   5. Keluar                        |");
-            System.out.println("+====================================+");
-            System.out.print("Pilih menu: ");
-
-            if (!input.hasNextInt()) {
-                System.out.println("Input menu harus berupa angka!");
-                input.nextLine();
-                continue;
-            }
-            int pilihan = input.nextInt();
-            input.nextLine();
-switch (pilihan) { 
-```
-Program ini menggunakan **`Scanner`** untuk membaca input dari user melalui keyboard dan **`ArrayList<String[]>`** untuk menyimpan data barang secara dinamis. Setiap elemen ArrayList berisi [0] ID, [1] Nama, [2] Stok, dan [3] Lokasi barang. Deklarasi boolean `jalan` digunakan sebagai flag untuk menjaga agar program tetap berjalan selama value dari jalan adalah true di dalam loop utama `while(jalan)` sampai user memilih menu keluar.
-
-Di dalam loop utama ini, program menampilkan menu inventaris menggunakan **switch-case** untuk menentukan aksi berdasarkan input user. Input menu divalidasi terlebih dahulu dengan `hasNextInt()` agar program tidak error jika user memasukkan karakter non-angka. Setelah membaca angka menu dengan `nextInt()`, digunakan `nextLine()` untuk mengosongkan buffer agar input berikutnya bisa terbaca dengan benar karena kalau tidak kosongkan "\n" dari nexint akan terbawa kena nxtline berikutanya yang akan menyebabkan scaner tersebut akan terskip.
-
-
-## Case 1 Create
-```java
-case 1: // Create
-                      if (daftarBarang.isEmpty()) {
-                        System.out.println("Daftar barang masih kosong.");
-                    } else {
-                        System.out.println("\n===== DAFTAR BARANG =====");
-                        for (int i = 0; i < daftarBarang.size(); i++) {
-                            String[] b = daftarBarang.get(i);
-                            System.out.println("ID Barang : " + b[0]);
-                            System.out.println("Nama      : " + b[1]);
-                            System.out.println("Stok      : " + b[2]);
-                            System.out.println("Lokasi    : " + b[3]);
-                            System.out.println("------------------------------");
-                        }
-                    }
-                    System.out.print("Masukkan ID Barang   : ");
-                    String id = input.nextLine();
-
-                    boolean ada = false;
-                    for (int i = 0; i < daftarBarang.size(); i++) {
-                        if (daftarBarang.get(i)[0].equalsIgnoreCase(id)) {
-                            ada = true;
-                            break;
-                        }
-                    }
-
-                    if (ada) {
-                        System.out.println("Gagal menambahkan. ID Barang \"" + id + "\" sudah ada.");
-                    } else {
-                        System.out.print("Masukkan Nama Barang : ");
-                        String nama = input.nextLine();
-                        if (nama.trim().isEmpty()) {
-                            System.out.println("Nama barang tidak boleh kosong.");
-                            break;
-                        }
-
-                        System.out.print("Masukkan Stok        : ");
-                        if (!input.hasNextInt()) {
-                            System.out.println("Stok harus berupa angka!");
-                            input.nextLine();
-                            break;
-                        }
-                        int stok = input.nextInt();
-                        input.nextLine();
-                        if (stok < 0) {
-                            System.out.println("Stok tidak boleh negatif.");
-                            break;
-                        }
-
-                        System.out.print("Masukkan Lokasi      : ");
-                        String lokasi = input.nextLine();
-                        if (lokasi.trim().isEmpty()) {
-                            System.out.println("Lokasi tidak boleh kosong.");   
-                            break;
-                        }
-
-                        String[] barang = {id, nama, String.valueOf(stok), lokasi};
-                        daftarBarang.add(barang);
-
-                        System.out.println("Barang berhasil ditambahkan.");
-                    }
-                    break;
-```
-Pada **case 1 (Create)**, program pertama menampilkan daftar barang (arraylist) yang sudah ada menggunakan loop `for` agar user bisa melihat ID yang tersedia. Program kemudian meminta user memasukkan ID barang baru dan mengecek apakah ID tersebut sudah ada di ArrayList menggunakan boolean `ada`. Jika ID sudah ada, program menampilkan pesan error. Jika ID valid, user diminta memasukkan Nama, Stok, dan Lokasi. Nama dan Lokasi divalidasi menggunakan `trim().isEmpty()` agar tidak kosong, sedangkan Stok divalidasi dengan `hasNextInt()` dan dicek agar tidak negatif. Jika semua input valid, data barang baru ditambahkan ke ArrayList dan program menampilkan pesan berhasil menambahkan barang.
-
-
-## Case 2 Read
-```java
-case 2: // Read
-                    if (daftarBarang.isEmpty()) {
-                        System.out.println("Daftar barang masih kosong.");
-                    } else {
-                        System.out.println("\n===== DAFTAR BARANG =====");
-                        for (int i = 0; i < daftarBarang.size(); i++) {
-                            String[] b = daftarBarang.get(i);
-                            System.out.println("ID Barang : " + b[0]);
-                            System.out.println("Nama      : " + b[1]);
-                            System.out.println("Stok      : " + b[2]);
-                            System.out.println("Lokasi    : " + b[3]);
-                            System.out.println("------------------------------");
-                        }
-                    }
-                    break;
-
-```
-**Case 2 (Read)** menampilkan daftar barang yang ada di ArrayList. Jika ArrayList kosong, program menampilkan pesan “Daftar barang masih kosong”. Loop `for` digunakan untuk mengakses setiap elemen ArrayList dan menampilkannya secara rapi dengan format ID, Nama, Stok, dan Lokasi.
-
-
-## Case 3 Update
-```java
-case 3: // Update
-                      if (daftarBarang.isEmpty()) {
-                        System.out.println("Daftar barang masih kosong.");
-                    } else {
-                        System.out.println("\n===== DAFTAR BARANG =====");
-                        for (int i = 0; i < daftarBarang.size(); i++) {
-                            String[] b = daftarBarang.get(i);
-                            System.out.println("ID Barang : " + b[0]);
-                            System.out.println("Nama      : " + b[1]);
-                            System.out.println("Stok      : " + b[2]);
-                            System.out.println("Lokasi    : " + b[3]);
-                            System.out.println("------------------------------");
-                        }
-                    }
-                    System.out.print("Masukkan ID Barang yang akan diupdate: ");
-                    String idCari = input.nextLine();
-                    boolean ditemukan = false;
-
-                    for (int i = 0; i < daftarBarang.size(); i++) {
-                        String[] b = daftarBarang.get(i);
-                        if (b[0].equalsIgnoreCase(idCari)) {
-                            ditemukan = true;
-                            System.out.println("Data ditemukan. Silakan masukkan data baru:");
-
-                            System.out.print("Nama Barang baru (lama: " + b[1] + "): ");
-                            String namaBaru = input.nextLine();
-                            if (namaBaru.trim().isEmpty()) {
-                                System.out.println("Nama barang tidak boleh kosong.");
-                                break;
-                            }
-
-                            System.out.print("Stok baru (lama: " + b[2] + "): ");
-                            if (!input.hasNextInt()) {
-                                System.out.println("Stok harus berupa angka!");
-                                input.nextLine();
-                                break;
-                            }
-                            int stokBaru = input.nextInt();
-                            input.nextLine();
-                            if (stokBaru < 0) {
-                                System.out.println("Stok tidak boleh negatif.");
-                                break;
-                            }
-
-                            System.out.print("Lokasi baru (lama: " + b[3] + "): ");
-                            String lokasiBaru = input.nextLine();
-                            if (lokasiBaru.trim().isEmpty()) {
-                                System.out.println("Lokasi tidak boleh kosong.");
-                                break;
-                            }
-
-                            b[1] = namaBaru;
-                            b[2] = String.valueOf(stokBaru);
-                            b[3] = lokasiBaru;
-
-                            System.out.println("Data barang berhasil diperbarui.");
-                            break;
-                        }
-                    }
-
-                    if (!ditemukan) {
-                        System.out.println("Barang dengan ID tersebut tidak ditemukan.");
-                    }
-                    break;
-
-```
-Pada **case 3 (Update)**, daftar barang ditampilkan terlebih dahulu sebelum user diminta memasukkan ID yang ingin diubah. Program menggunakan boolean `ditemukan` untuk menandai apakah ID tersebut ada di ArrayList. ID dibandingkan menggunakan `equalsIgnoreCase()`, sehingga pencarian tidak sensitif terhadap huruf besar atau kecil. Jika ID ditemukan, program meminta input data baru untuk Nama, Stok, dan Lokasi, dengan validasi yang sama seperti pada case Create. Data lama diupdate langsung pada ArrayList dan program menampilkan pesan berhasil memperbarui barang.
-
-
-
-## Case 4 Delete & close
-```java
-case 4: // Delete
-                     if (daftarBarang.isEmpty()) {
-                        System.out.println("Daftar barang masih kosong.");
-                    } else {
-                        System.out.println("\n===== DAFTAR BARANG =====");
-                        for (int i = 0; i < daftarBarang.size(); i++) {
-                            String[] b = daftarBarang.get(i);
-                            System.out.println("ID Barang : " + b[0]);
-                            System.out.println("Nama      : " + b[1]);
-                            System.out.println("Stok      : " + b[2]);
-                            System.out.println("Lokasi    : " + b[3]);
-                            System.out.println("------------------------------");
-                        }
-                    }
-                    System.out.print("Masukkan ID Barang yang akan dihapus: ");
-                    String idHapus = input.nextLine();
-                    boolean terhapus = false;
-
-                    for (int i = 0; i < daftarBarang.size(); i++) {
-                        if (daftarBarang.get(i)[0].equalsIgnoreCase(idHapus)) {
-                            daftarBarang.remove(i);
-                            terhapus = true;
-                            System.out.println("Barang berhasil dihapus.");
-                            break;
-                        }
-                    }
-
-                    if (!terhapus) {
-                        System.out.println("Barang dengan ID tersebut tidak ditemukan.");
-                    }
-                    break;
-
-                case 5: // Keluar
-                    System.out.println("Terima kasih, program selesai.");
-                    jalan = false;
-                    break;
-
-                default:
-                    System.out.println("Pilihan tidak valid, coba lagi.");
-            }
-        }
-
-        input.close();
-        }
-```
-**Case 4 (Delete)** mirip dengan case Update, di mana daftar barang ditampilkan terlebih dahulu. User diminta memasukkan ID barang yang ingin dihapus, dan boolean `terhapus` menandai apakah ID ditemukan. Jika ID valid, barang dihapus dari ArrayList menggunakan `daftarBarang.remove(i)` berdasarkan indeks, dan program menampilkan pesan berhasil menghapus. Jika ID tidak ditemukan, program menampilkan pesan error.
-
-**Case 5 (Exit)** mengubah boolean `jalan` menjadi `false`, sehingga loop utama berhenti dan program keluar. Sebelum keluar, program menampilkan pesan terima kasih.
-
-Dan terakhir setelah looping case nya kita tutup ada `input.close()` buat nutup scaner biar bisa istirahat karena setiap resource yang dibuka sebaiknya ditutup.
-
-
-
-di program ini saya menggunakan `.trim` agar user tidak menginput hanya spasi karena kegunaan trim adalah untuk menghapus spasi yang berada sebelum dan sesudah karakter contoh "   lap top   " maka akan terbada "lap top" karena trim lalu saya menggunakan <0 untuk stok agar user tidak bisa menginput value negatif, koma, dan huruf, Tetapi karena ini nextInt dia tidak bisa menerima inputan **`hanya`** spasi jika itu terjadi maka inputan akan ngestuck sampai user menginput sesuatu yang invalid untuk hal ini adalah value negatif, koma, dan huruf baru kita bisa keluar dari inputan dan di kembalikan ke menu awal.
-
-</details>
-<details>
-  <summary> 🖥️📤📥 Output </summary>
- 
-## Output Program
-### Menu Utama
-<img width="410" height="156" alt="Screenshot 2025-09-10 171628" src="https://github.com/user-attachments/assets/27a2b5a1-f04c-41cd-bbd4-8419cfbe227b" />
-
-Ketika pertama kali menjalankan kode maka akan muncul menu utama yang berisi Create, Read, Update, Delete, dan Exit.
-
-### Menu Create
-<img width="418" height="391" alt="Screenshot 2025-09-10 171641" src="https://github.com/user-attachments/assets/b64e39d5-4be0-4a75-955d-cdfb042e60c4" />
-<img width="327" height="94" alt="Screenshot 2025-09-10 171741" src="https://github.com/user-attachments/assets/e99d5e5a-4bbc-41d5-b769-91dddb658023" />
-<img width="331" height="76" alt="Screenshot 2025-09-10 171705" src="https://github.com/user-attachments/assets/ec8e83ec-f7da-43e6-89ee-91d1127af8cc" />
-
-pertama-tama Sistem menampilkan daftar barang (Read) agar user bisa melihar id mana yang sudah dipakai
-
-Ketika memasukkan angka 1 di menu utama akan muncul menu membuat Barang. Jika ID ada di ArrayList/ kita memasukan data tidak sesuai format maka akan muncul pesan gagal dan mengembalikan kita ke menu awal.
-
-<img width="343" height="307" alt="Screenshot 2025-09-10 171827" src="https://github.com/user-attachments/assets/95702092-21a3-41bf-8dc4-12a4072de2d0" />
-
-
-
-Jika ID  tidak ada di data sebelumnya maka kita akan diminta untuk mengisi data yang diperlukan untuk barang yaitu nama, stok, dan lokasi pastikan memasukan data dengan benar karena kalau tidak maka akan gagal dan akan kembali ke menu awal.
-
-### Menu Read
-<img width="373" height="325" alt="Screenshot 2025-09-10 171839" src="https://github.com/user-attachments/assets/5811edbe-e93e-44ab-a06a-463d150d600e" />
-<img width="236" height="19" alt="image" src="https://github.com/user-attachments/assets/9b802d92-17f0-47a8-a904-03644ad38828" />
-<img width="332" height="89" alt="image" src="https://github.com/user-attachments/assets/7e7251a2-0b53-4593-963e-930b24fb8802" />
-
-
-Ketika memasukkan angka 2 di menu utama maka akan muncul daftar data Barang dan jika tidak ada data  di dalam arraylist maka akan keluar pesan "daftar barang masih kosong" .
-
-### Menu Update
-<img width="369" height="145" alt="image" src="https://github.com/user-attachments/assets/3581d0e6-08e6-44e7-8d40-10b092a70a15" />
-
-
-
-Ketika memasukkan angka 3 di menu utama maka akan muncul daftar data barang dan menu untuk memasukkan ID  yang ingin diubah. Jika berhasil diubah maka akan muncul pesan data pesawat berhasil diubah dan jika id salah/invalid input maka akan di kembalikan ke menu utama .
-
-<img width="410" height="78" alt="Screenshot 2025-09-10 171913" src="https://github.com/user-attachments/assets/e3d2b1b4-9fc0-464e-8750-f4c65b1835fd" />
-
-
-### Menu Delete
-<img width="411" height="586" alt="Screenshot 2025-09-10 172820" src="https://github.com/user-attachments/assets/dfa13af0-a5cf-4afd-9861-3fbdadfa3cc5" />
-
-<img width="429" height="720" alt="Screenshot 2025-09-10 172908" src="https://github.com/user-attachments/assets/035852d8-f63c-4fad-bc7a-4814c3c8949a" />
-
-Ketika memasukkan angka 4 di menu utama maka akan muncul daftar barang dan inputan untuk memasukkan ID  yang ingin dihapus. Jika berhasil dihapus maka akan muncul pesan Barang berhasil dihapus.
-
-<img width="390" height="382" alt="Screenshot 2025-09-10 172840" src="https://github.com/user-attachments/assets/fd5fc3e7-d953-4e77-903d-e074cdcc427c" />
-
-Jika ID  tidak ada, maka akan muncul pesan Barang dengan ID tersebut tidak ditemukan.
-
-oh iya karna saya pakai equalsIgnoreCase buat cocokin id maka inputan user tidak sensitif terhadap huruf besar/kecil.
-
-### Exit
-<img width="434" height="222" alt="Screenshot 2025-09-10 172918" src="https://github.com/user-attachments/assets/50f28da9-2084-4829-a9f6-d1efc7e16b76" />
-
-Masukkan angka 5 pada menu utama untuk keluar dari program.
-
-</details>
-
