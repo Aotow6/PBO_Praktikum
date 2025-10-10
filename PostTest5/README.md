@@ -92,8 +92,19 @@ Interface **`Categorizable`** diimplementasikan oleh `Barang`.
 * Interface ini mendefinisikan kontrak method **`String getKategori()`**, memastikan setiap objek barang dapat mengembalikan kategorinya secara konsisten.
 
 ### Penjelasan Letak Polymorphism
-* **Overriding:** Terjadi pada method **`displayInfo()`** dan **`getKategori()`** di subclass.
-* **Dynamic Dispatch:** Di `ManajemenGudang`, saat memanggil `barang.displayInfo()`, JVM secara dinamis menentukan method mana yang akan dijalankan berdasarkan tipe objek aktual (`Elektronik` atau `Perabot`).
+* **Overriding:** Terjadi pada method **`displayInfo()`** dan **`getKategori()`** di subclass, menggantikan implementasi dari superclass.
+* **Dynamic Dispatch:** Di `ManajemenGudang`, saat memanggil `barang.displayInfo()`, JVM secara dinamis menentukan method mana yang akan dijalankan berdasarkan tipe objek aktual (`Elektronik` atau `Perabot`) saat *runtime*.
+
+#### Overloading
+* Terjadi pada class **`ManajemenGudang`** di method pencarian, yang memiliki dua versi dengan nama sama tetapi tanda tangan parameter berbeda:
+
+```java
+// 1. Mencari berdasarkan ID atau Nama (String)
+private static void cariBarang(String keyword) { ... } 
+
+// 2. Mencari berdasarkan Stok Minimal (Integer)
+private static void cariBarang(int minStok) { ... }
+```
 
 ### Penjelasan Letak Penerapan JDBC
 Program menggunakan JDBC untuk semua operasi data.
