@@ -107,6 +107,7 @@ private static void cariBarang(int minStok) { ... }
 
 ### Penjelasan Letak Penerapan JDBC
 Program menggunakan JDBC untuk semua operasi data.
+<img width="718" height="668" alt="image" src="https://github.com/user-attachments/assets/a61a4e89-6afe-422c-b168-5fba3d879935" />
 
 * **`model/Conn.java`**: Bertanggung jawab memuat driver dan membuka koneksi (`connect()`).
 * **`model/View.java`**: Menggunakan **`Statement`** untuk menjalankan kueri *Read All* dan *Count* data dari database.
