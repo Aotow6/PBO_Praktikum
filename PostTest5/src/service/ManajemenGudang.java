@@ -7,11 +7,9 @@ import java.util.*;
 
 
 public class ManajemenGudang {
-    // Penggunaan static final Scanner adalah praktik yang baik.
     private static final Scanner scanner = new Scanner(System.in);
 
     public void run() {
-        // Objek Conn dibuat untuk memastikan driver JDBC terinisialisasi.
         new Conn();
 
         while (true) {
@@ -31,7 +29,7 @@ public class ManajemenGudang {
                     case "2": new View().showData(); break;
                     case "3": updateBarang(); break;
                     case "4": hapusBarang(); break;
-                    case "5": searchBarang(); break;
+                    case "5": menuCariBarang(); break;
                     case "6":
                         System.out.println("Keluar dari program.");
                         return;
@@ -39,33 +37,28 @@ public class ManajemenGudang {
                         System.out.println("Pilihan tidak valid! Silakan masukkan angka 1-6.");
                 }
             } catch (InputMismatchException e) {
-                // Menangkap kesalahan umum jika Scanner digunakan dengan nextInt/nextDouble
                 System.out.println("ERROR: Input tidak valid. Pastikan Anda memasukkan tipe data yang benar.");
-                scanner.nextLine(); // Membersihkan buffer scanner
+                scanner.nextLine(); 
             } catch (NumberFormatException e) {
-                // Menangkap kesalahan saat mengkonversi String ke Integer
                 System.out.println("ERROR: Input angka tidak valid. Silakan coba lagi.");
             } catch (Exception e) {
-                // Menangkap kesalahan lain yang tidak terduga
                 System.out.println("ERROR: Terjadi kesalahan: " + e.getMessage());
             }
         }
     }
-
+        // Create
     private static void tambahBarang() {
         new View().showData();
         System.out.println("\n--- TAMBAH BARANG ---");
 
-        // Input ID Barang (diubah ke UPPERCASE dan divalidasi)
         System.out.print("Masukkan ID Barang: ");
         String id = scanner.nextLine().trim();
         if (id.isEmpty()) {
             System.out.println("ERROR: ID Barang tidak boleh kosong. Kembali ke menu utama.");
             return;
         }
-        id = id.toUpperCase(); // Mengubah ID menjadi UPPERCASE
+        id = id.toUpperCase(); 
 
-        // Input Nama Barang (divalidasi)
         System.out.print("Masukkan Nama Barang: ");
         String nama = scanner.nextLine().trim();
         if (nama.isEmpty()) {
@@ -73,7 +66,6 @@ public class ManajemenGudang {
             return;
         }
 
-        // Input Stok
         int stok;
         System.out.print("Masukkan Stok (angka): ");
         String stokInput = scanner.nextLine().trim();
@@ -85,7 +77,6 @@ public class ManajemenGudang {
             return;
         }
 
-        // Input Lokasi (divalidasi)
         System.out.print("Masukkan Lokasi: ");
         String lokasi = scanner.nextLine().trim();
         if (lokasi.isEmpty()) {
@@ -93,7 +84,6 @@ public class ManajemenGudang {
             return;
         }
 
-        // Input Kategori berbasis angka (1/2)
         System.out.println("Pilih Kategori:");
         System.out.println("1. ELEKTRONIK");
         System.out.println("2. PERABOT");
@@ -113,7 +103,7 @@ public class ManajemenGudang {
                 return;
             }
             barang = new Elektronik(id, nama, stok, lokasi, garansi);
-        } else if (pilihanKategori.equals("2")) { // PERABOT
+        } else if (pilihanKategori.equals("2")) { // PERABO
             System.out.print("Masukkan Bahan: ");
             String bahan = scanner.nextLine().trim();
             if (bahan.isEmpty()) {
@@ -126,9 +116,9 @@ public class ManajemenGudang {
             return;
         }
 
-        barang.save(); // Panggilan ke method ORM di class Barang
+        barang.save(); 
     }
-
+    // Update
     private static void updateBarang() {
         new View().showData();
         System.out.println("\n--- UPDATE BARANG ---");
@@ -139,7 +129,7 @@ public class ManajemenGudang {
             System.out.println("ERROR: ID tidak boleh kosong. Kembali ke menu utama.");
             return;
         }
-        id = id.toUpperCase(); // Mengubah ID menjadi UPPERCASE
+        id = id.toUpperCase(); 
 
         Barang barang = null;
         String namaUpdate = null;
@@ -153,7 +143,6 @@ public class ManajemenGudang {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                // 1. Re-Instantiate objek dari database
                 String kategoriDB = rs.getString("kategori");
                 if ("ELEKTRONIK".equalsIgnoreCase(kategoriDB)) {
                     barang = new Elektronik(rs.getString("id_barang"), rs.getString("nama_barang"),
@@ -168,7 +157,6 @@ public class ManajemenGudang {
 
                 System.out.println("\nSilahkan isi data baru / tekan Enter untuk mempertahankan data lama.");
 
-                // 2. Input Atribut Umum
                 System.out.print("Nama baru (lama: " + barang.getNamaBarang() + "): ");
                 String namaBaru = scanner.nextLine().trim();
                 if (!namaBaru.isEmpty()) {
@@ -179,7 +167,7 @@ public class ManajemenGudang {
                 System.out.print("Stok baru (lama: " + barang.getStok() + ", Enter = tetap): ");
                 String stokInput = scanner.nextLine().trim();
                 if (!stokInput.isEmpty()) {
-                    int stokTemp = Integer.parseInt(stokInput); // Memicu NumberFormatException
+                    int stokTemp = Integer.parseInt(stokInput); 
                     if (stokTemp < 0) throw new IllegalArgumentException("Stok tidak boleh negatif.");
                     stokUpdate = stokTemp;
                     barang.setStok(stokTemp);
@@ -192,14 +180,13 @@ public class ManajemenGudang {
                     barang.setLokasi(lokasiBaru);
                 }
 
-                // 3. Input Atribut Subclass
                 if (barang instanceof Elektronik) {
                     Elektronik e = (Elektronik) barang;
                     System.out.print("Garansi baru (bulan) (lama: " + e.getGaransiBulan() + "): ");
                     inputSpesifik = scanner.nextLine().trim();
                     if (!inputSpesifik.isEmpty()) {
-                        int garansiBaru = Integer.parseInt(inputSpesifik); // Memicu NumberFormatException
-                        e.setGaransiBulan(garansiBaru); // Memicu IllegalArgumentException (validasi)
+                        int garansiBaru = Integer.parseInt(inputSpesifik); 
+                        e.setGaransiBulan(garansiBaru); 
                     }
 
                 } else if (barang instanceof Perabot) {
@@ -207,17 +194,14 @@ public class ManajemenGudang {
                     System.out.print("Bahan baru (lama: " + p.getBahan() + "): ");
                     inputSpesifik = scanner.nextLine().trim();
                     if (!inputSpesifik.isEmpty()) {
-                        p.setBahan(inputSpesifik); // Memicu IllegalArgumentException (validasi)
+                        p.setBahan(inputSpesifik); 
                     }
                 }
 
-                // --- 4. Panggil ORM untuk update ke Database ---
-                // Panggil method ORM update untuk atribut umum
+
                 barang.update(namaUpdate, stokUpdate, lokasiUpdate);
 
-                // Panggil ORM manual untuk atribut spesifik jika ada perubahan
                 if (barang instanceof Elektronik && inputSpesifik != null && !inputSpesifik.isEmpty()) {
-                    // Update Garansi
                     String sql = "UPDATE barang SET garansi_bulan = ? WHERE id_barang = ?";
                     try (PreparedStatement psUpdate = conn.prepareStatement(sql)) {
                         psUpdate.setInt(1, ((Elektronik) barang).getGaransiBulan());
@@ -225,7 +209,6 @@ public class ManajemenGudang {
                         psUpdate.executeUpdate();
                     }
                 } else if (barang instanceof Perabot && inputSpesifik != null && !inputSpesifik.isEmpty()) {
-                    // Update Bahan
                     String sql = "UPDATE barang SET bahan = ? WHERE id_barang = ?";
                     try (PreparedStatement psUpdate = conn.prepareStatement(sql)) {
                         psUpdate.setString(1, ((Perabot) barang).getBahan());
@@ -251,31 +234,58 @@ public class ManajemenGudang {
             System.out.println("ERROR: Update gagal: " + e.getMessage());
         }
     }
-
+    // Delete
     private static void hapusBarang() {
         new View().showData();
         System.out.println("\n--- HAPUS BARANG ---");
         System.out.print("Masukkan ID Barang yang ingin dihapus: ");
-        // Input ID Barang (diubah ke UPPERCASE dan divalidasi)
         String id = scanner.nextLine().trim();
 
         if (id.isEmpty()) {
             System.out.println("ERROR: ID tidak boleh kosong. Kembali ke menu utama.");
             return;
         }
-        id = id.toUpperCase(); // Mengubah ID menjadi UPPERCASE
+        id = id.toUpperCase(); 
 
-        // Membuat objek placeholder untuk memanggil method delete() ORM
-        // ID yang digunakan adalah ID yang sudah di-UPPERCASE
+
         Barang dummy = new Perabot(id, "", 0, "", "");
         dummy.delete();
     }
+        // Cari
+    private static void menuCariBarang() {
+        System.out.println("\n--- PILIH JENIS PENCARIAN ---");
+        System.out.println("1. Berdasarkan ID atau Nama (String)");
+        System.out.println("2. Berdasarkan Stok Minimal (Integer)");
+        System.out.print("Pilih jenis pencarian: ");
+        String pilihan = scanner.nextLine().trim();
 
-    private static void searchBarang() {
-        new View().showData();
-        System.out.println("\n--- CARI BARANG ---");
-        System.out.print("Masukkan ID atau Nama Barang: ");
-        String keyword = scanner.nextLine().trim(); // Menerapkan trim()
+        try {
+            if (pilihan.equals("1")) {
+                System.out.print("Masukkan ID atau Nama: ");
+                String keyword = scanner.nextLine().trim();
+                cariBarang(keyword); 
+            } else if (pilihan.equals("2")) {
+                System.out.print("Masukkan Stok Minimal (angka): ");
+                String stokInput = scanner.nextLine().trim();
+                if (stokInput.isEmpty()) {
+                    System.out.println("ERROR: Stok minimal tidak boleh kosong. Kembali ke menu utama.");
+                    return;
+                }
+                int minStok = Integer.parseInt(stokInput); 
+                cariBarang(minStok); 
+            } else {
+                System.out.println("Pilihan tidak valid.");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("ERROR: Input stok minimal harus berupa angka. Kembali ke menu utama.");
+        } catch (Exception e) {
+            System.out.println("ERROR: Terjadi kesalahan: " + e.getMessage());
+        }
+    }
+    private static void cariBarang(String keyword) {
+
+
+        System.out.println("\n--- CARI BARANG BERDASARKAN ID/NAMA ---");
 
         if (keyword.isEmpty()) {
             System.out.println("ERROR: Kata kunci tidak boleh kosong! Kembali ke menu utama.");
@@ -285,20 +295,20 @@ public class ManajemenGudang {
         try (Connection conn = Conn.connect();
              PreparedStatement ps = conn.prepareStatement(
                      "SELECT * FROM barang WHERE id_barang LIKE ? OR nama_barang LIKE ?")) {
-            // Menerapkan trim() pada keyword pencarian
+
             String searchPattern = "%" + keyword + "%";
             ps.setString(1, searchPattern);
             ps.setString(2, searchPattern);
             ResultSet rs = ps.executeQuery();
 
             boolean found = false;
+
             System.out.printf("%-10s %-20s %-10s %-15s %-15s %-15s %-15s%n",
                     "ID", "Nama", "Stok", "Lokasi", "Kategori", "Garansi", "Bahan");
             System.out.println("--------------------------------------------------------------------------------------------");
 
             while (rs.next()) {
                 found = true;
-                // Output tidak berubah
                 System.out.printf("%-10s %-20s %-10d %-15s %-15s %-15s %-15s%n",
                         rs.getString("id_barang"),
                         rs.getString("nama_barang"),
@@ -309,9 +319,43 @@ public class ManajemenGudang {
                         rs.getString("bahan") != null ? rs.getString("bahan") : "-");
             }
 
-            if (!found) System.out.println("Barang tidak ditemukan.");
+            if (!found) {
+                System.out.println("Barang tidak ditemukan untuk kata kunci '" + keyword + "'.");
+            }
         } catch (Exception e) {
             System.out.println("ERROR: Pencarian gagal: " + e.getMessage());
         }
     }
-}
+    private static void cariBarang(int minStok) {
+        System.out.println("\n--- CARI BARANG BERDASARKAN STOK MINIMAL ---");
+
+        String sql = "SELECT id_barang, nama_barang, stok, lokasi, kategori, garansi_bulan, bahan FROM barang WHERE stok >= ?";
+
+        try (Connection conn = Conn.connect();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, minStok);
+            ResultSet rs = ps.executeQuery();
+
+            boolean found = false;
+            System.out.printf("%-10s %-20s %-10s %-15s %-15s %-15s %-15s%n",
+                    "ID", "Nama", "Stok", "Lokasi", "Kategori", "Garansi", "Bahan");
+            System.out.println("--------------------------------------------------------------------------------------------");
+
+            while (rs.next()) {
+                found = true;
+                System.out.printf("%-10s %-20s %-10d %-15s %-15s %-15s %-15s%n",
+                        rs.getString("id_barang"),
+                        rs.getString("nama_barang"),
+                        rs.getInt("stok"),
+                        rs.getString("lokasi"),
+                        rs.getString("kategori"),
+                        rs.getObject("garansi_bulan") != null ? rs.getInt("garansi_bulan") + " bln" : "-",
+                        rs.getString("bahan") != null ? rs.getString("bahan") : "-");
+            }
+
+            if (!found) System.out.println("Tidak ditemukan barang dengan stok minimal " + minStok + ".");
+        } catch (Exception e) {
+            System.out.println("ERROR: Pencarian gagal: " + e.getMessage());
+        }
+    }
+    }
