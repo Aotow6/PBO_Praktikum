@@ -38,7 +38,6 @@ Sekarang program telah tersambung secara Realtime ke database berkat jdbc.
 - **Class Baru:**
     - `model/Conn.java` → Mengurus koneksi database (JDBC).
     - `model/View.java` → Class khusus untuk menampilkan semua data dari tabel menggunakan **JDBC `Statement`**.
-- **Pembaruan Update:** Method `updateBarang()` di `ManajemenGudang` kini dapat mengubah atribut umum (`Nama`, `Stok`, `Lokasi`) dan atribut spesifik (`Garansi`/`Bahan`) dalam satu alur, memastikan sinkronisasi antara objek di memori dan data di database.
 
 ---
 
