@@ -18,7 +18,6 @@ public abstract class Barang implements Categorizable {
         this.kategori = kategori;
     }
 
-    // Getter & Setter → Encapsulation
     public String getIdBarang() { return idBarang; }
     public void setIdBarang(String idBarang) { this.idBarang = idBarang; }
 
@@ -33,10 +32,8 @@ public abstract class Barang implements Categorizable {
 
     public String getKategori() { return kategori; }
 
-    // Abstrak method → wajib dioverride oleh subclass
     public abstract void displayInfo();
 
-    // ORM Basic: Create
     public void save() {
         String sql = "INSERT INTO barang (id_barang, nama_barang, stok, lokasi, kategori, garansi_bulan, bahan) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = Conn.connect(); PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -62,7 +59,6 @@ public abstract class Barang implements Categorizable {
         }
     }
 
-    // ORM Basic: Update
     public void update(String namaBaru, Integer stokBaru, String lokasiBaru) {
         String sql = "UPDATE barang SET nama_barang = ?, stok = ?, lokasi = ? WHERE id_barang = ?";
         try (Connection conn = Conn.connect(); PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -71,20 +67,16 @@ public abstract class Barang implements Categorizable {
             ps.setString(3, (lokasiBaru == null || lokasiBaru.isEmpty()) ? lokasi : lokasiBaru);
             ps.setString(4, idBarang);
             ps.executeUpdate();
-            // Hapus System.out.println(" Data barang berhasil diperbarui!");
         } catch (Exception e) {
-            // Biarkan pesan error tetap ada
             System.out.println(" Gagal memperbarui barang umum: " + e.getMessage());
-            throw new RuntimeException("Gagal update data umum."); // Lempar exception agar tertangkap di ManajemenGudang
+            throw new RuntimeException("Gagal update data umum."); 
         }
     }
 
-    // ORM Basic: Delete
     public void delete() {
         String sql = "DELETE FROM barang WHERE id_barang = ?";
         try (Connection conn = Conn.connect(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, idBarang);
-            // Mendapatkan jumlah baris yang terpengaruh
             int rowsAffected = ps.executeUpdate();
 
             if (rowsAffected > 0) {
@@ -96,4 +88,5 @@ public abstract class Barang implements Categorizable {
             System.out.println("Gagal menghapus barang: " + e.getMessage());
         }
     }
+
 }
