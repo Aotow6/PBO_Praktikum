@@ -229,10 +229,15 @@ Sekarang Search memilikin menu yang menggunakan switch case yaitu pilihan 1 untu
 
 **Tampilan:**
 
-<img width="413" height="305" alt="image" src="https://github.com/user-attachments/assets/5651c565-1b08-424a-b5e7-41cc61dfa3c1" />
-<img width="463" height="656" alt="image" src="https://github.com/user-attachments/assets/33a1d0cf-9f15-410e-b33f-f44b278d1995" />
-<img width="477" height="642" alt="image" src="https://github.com/user-attachments/assets/ad427ff7-3479-461b-b086-103fb3cbeeb0" />
+<img width="355" height="112" alt="image" src="https://github.com/user-attachments/assets/8f4834b0-9fe2-4c84-b2ab-66930c7c5c41" />
+<img width="568" height="545" alt="image" src="https://github.com/user-attachments/assets/03a93736-7b39-45fb-9ea3-1ba157c6b31d" />
+
+
 <img width="228" height="82" alt="image" src="https://github.com/user-attachments/assets/21cba3b5-c6d2-41ff-8bd9-b7746cd3d561" />
+<img width="779" height="264" alt="image" src="https://github.com/user-attachments/assets/1377191c-8438-40f9-86d2-bb30162e3155" />
+<img width="779" height="463" alt="image" src="https://github.com/user-attachments/assets/e86f4a9a-77e5-4b03-9eac-421558301db4" />
+
+
 
 ---
 
