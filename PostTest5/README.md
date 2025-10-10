@@ -17,7 +17,7 @@ Sistem ini memungkinkan manajemen data barang secara efisien melalui fitur **CRU
 | :--- | :--- | :--- |
 | **Encapsulation** | ✅ Kuat | Getter & Setter digunakan dengan **validasi data** (misalnya, stok/garansi non-negatif) di *setter* subclass. |
 | **Inheritance** | ✅ Diterapkan | `Elektronik` dan `Perabot` mewarisi dari `Barang`. |
-| **Polymorphism** | ✅ Kuat | *Overriding* (`displayInfo()`, `getKategori()`) dan *Dynamic Dispatch* saat memproses data di `ManajemenGudang`. |
+| **Polymorphism** | ✅ Kuat | *Overriding* (`displayInfo()`, `getKategori()`) dan *Dynamic Dispatch* saat memproses data di `ManajemenGudang`& *OverrLoadding* di pencarian barang. |
 | **Abstraction** | ✅ Kuat | `Barang` sebagai *abstract class* yang mendefinisikan kontrak `displayInfo()`. |
 | **Interface** | ✅ Diterapkan | `Categorizable` memastikan konsistensi method `getKategori()`. |
 | **JDBC** | ✅ Terintegrasi | Koneksi database, pemuatan driver, dan eksekusi SQL melalui `Connection`, `Statement`, dan `PreparedStatement`. |
