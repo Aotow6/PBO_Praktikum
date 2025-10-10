@@ -115,8 +115,42 @@ Program menggunakan JDBC untuk semua operasi data.
 
 ### Penjelasan Letak Penerapan ORM
 Class **`Barang`** bertindak sebagai *Data Mapper* yang memetakan objek ke baris tabel `barang`.
+``` java
+// Dalam class Barang.java, di method public void save() { ...
+// ...
+if (this instanceof Elektronik) {
+    ps.setInt(6, ((Elektronik) this).getGaransiBulan()); 
+    ps.setNull(7, java.sql.Types.VARCHAR);
+} else if (this instanceof Perabot) {
+    ps.setNull(6, java.sql.Types.INTEGER);
+    ps.setString(7, ((Perabot) this).getBahan()); 
+}
+ps.executeUpdate();
+// ...
 
+```
 * **Create (`save()`):** Atribut objek (`this.idBarang`, `this.stok`, dll.) langsung dimasukkan ke `PreparedStatement`. Logika `instanceof` digunakan untuk memetakan atribut spesifik subclass (`garansiBulan` atau `bahan`) ke kolom yang benar.
+``` java
+// A. Update Atribut Umum (Barang.update())
+// Dalam class Barang.java, di method public void update(...) { ...
+String sql = "UPDATE barang SET nama_barang = ?, stok = ?, lokasi = ? WHERE id_barang = ?";
+// ...
+ps.setString(1, (namaBaru == null || namaBaru.isEmpty()) ? namaBarang : namaBaru);
+// ...
+ps.executeUpdate();
+
+
+// B. Update Atribut Spesifik (Logic di ManajemenGudang.updateBarang())
+if (barang instanceof Elektronik && inputSpesifik != null && !inputSpesifik.isEmpty()) {
+    String sql = "UPDATE barang SET garansi_bulan = ? WHERE id_barang = ?";
+    try (PreparedStatement psUpdate = conn.prepareStatement(sql)) {
+        psUpdate.setInt(1, ((Elektronik) barang).getGaransiBulan()); 
+        psUpdate.setString(2, barang.getIdBarang());
+        psUpdate.executeUpdate();
+    }
+} 
+// ...
+```
 * **Update (`ManajemenGudang`):** Logic update yang kompleks mengambil nilai dari objek di memori (`((Elektronik) barang).getGaransiBulan()`) dan mengirimkannya melalui `PreparedStatement` terpisah ke database, memastikan objek dan data database selalu sinkron.
 
 ---
