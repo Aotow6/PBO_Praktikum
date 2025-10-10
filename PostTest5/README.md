@@ -4,38 +4,44 @@ NIM: 2409116067\
 Tema: Inventaris Gudang
 
 # Deskripsi
-Program ini merupakan sistem inventaris gudang berbasis Java yang mengimplementasikan konsep **OOP (Object-Oriented Programming)** secara menyeluruh. Program memungkinkan pengguna untuk mengelola data barang melalui fitur CRUD (Create, Read, Update, Delete), pencarian, validasi input, serta penerapan konsep lanjutan seperti **Encapsulation, Inheritance, Polymorphism, Abstraction, Interface, dan Overloading.**
+Program ini adalah sistem manajemen inventaris gudang yang dikembangkan menggunakan **Java**. Program ini mengimplementasikan konsep **OOP (Object-Oriented Programming)** secara menyeluruh dan terintegrasi dengan **MySQL** melalui **JDBC** untuk persistensi data, menerapkan pola **ORM (Object-Relational Mapping)** sederhana.
+
+Sistem ini memungkinkan manajemen data barang secara efisien melalui fitur **CRUD** (Create, Read, Update, Delete) yang kini aman dan terpusat di database.
+---
 
 
-Program ini sudah menerapkan:
-- **Encapsulation** (getter & setter untuk proteksi data)  
-- **Inheritance** (superclass `Barang`, subclass `Elektronik` & `Perabot`)  
-- **Overriding** (method `tampilkanInfo()` dioverride di subclass)  
-- **Validasi input** (mencegah data kosong, negatif, atau duplikat)  
-- **Struktur MVC sederhana** dengan pemisahan package:  
-  - `model` → struktur data  
-  - `service` → logika program (Controller)  
-  - `main` → tampilan menu (View)
+
+## 🟢 Status Implementasi Konsep & Teknologi
+
+| Konsep | Status | Catatan Implementasi Utama |
+| :--- | :--- | :--- |
+| **Encapsulation** | ✅ Kuat | Getter & Setter digunakan dengan **validasi data** (misalnya, stok/garansi non-negatif) di *setter* subclass. |
+| **Inheritance** | ✅ Diterapkan | `Elektronik` dan `Perabot` mewarisi dari `Barang`. |
+| **Polymorphism** | ✅ Kuat | *Overriding* (`displayInfo()`, `getKategori()`) dan *Dynamic Dispatch* saat memproses data di `ManajemenGudang`. |
+| **Abstraction** | ✅ Kuat | `Barang` sebagai *abstract class* yang mendefinisikan kontrak `displayInfo()`. |
+| **Interface** | ✅ Diterapkan | `Categorizable` memastikan konsistensi method `getKategori()`. |
+| **JDBC** | ✅ Terintegrasi | Koneksi database, pemuatan driver, dan eksekusi SQL melalui `Connection`, `Statement`, dan `PreparedStatement`. |
+| **ORM** | ✅ Diterapkan | Pola *Data Mapper* (`save`, `update`, `delete`) di `Barang.java` memetakan objek ke tabel database. |
 
 ---
 
 ## 📂 Struktur Packages (MVC)
-<img width="608" height="252" alt="image" src="https://github.com/user-attachments/assets/a0d33761-01ef-47ac-b90c-b2d70e4cbec3" />
+<img width="328" height="281" alt="image" src="https://github.com/user-attachments/assets/beef47be-6c7f-44a1-837c-a011c85fa027" />
 
 ## 🆕 Apa Yang Baru?
-- **Abstraction**  
-  - `Barang` kini menjadi **abstract class** yang tidak bisa di-instantiate langsung.  
-  - Memastikan setiap subclass wajib mengimplementasikan method `tampilkanInfo()`.  
+Sekarang program telah tersambung secara Realtime ke database berkat jdbc.
+<img width="815" height="161" alt="image" src="https://github.com/user-attachments/assets/763b4f41-b205-47f0-99b5-8fc05124dd16" />
+<img width="350" height="691" alt="image" src="https://github.com/user-attachments/assets/d472e5c2-78f6-4865-b642-c8498cb8a008" />
 
-- **Interface**  
-  - Interface `Categorizable` digunakan untuk menampilkan kategori barang secara konsisten.
+- **Integrasi Database:** Seluruh operasi CRUD kini berinteraksi dengan tabel `barang` di MySQL.
+- **ORM Penuh:** Class `Barang` bertindak sebagai dasar ORM dengan method `save()`, `update()`, dan `delete()` yang mengkonversi objek Java ke SQL dan sebaliknya.
+- **Class Baru:**
+    - `model/Conn.java` → Mengurus koneksi database (JDBC).
+    - `model/View.java` → Class khusus untuk menampilkan semua data dari tabel menggunakan **JDBC `Statement`**.
+- **Pembaruan Update:** Method `updateBarang()` di `ManajemenGudang` kini dapat mengubah atribut umum (`Nama`, `Stok`, `Lokasi`) dan atribut spesifik (`Garansi`/`Bahan`) dalam satu alur, memastikan sinkronisasi antara objek di memori dan data di database.
 
-- **Polymorphism**  
-  - **Overriding**: Method `tampilkanInfo()` dioverride di `Elektronik` & `Perabot`.  
-  - **Overloading**:  
-    - `cariBarang(String keyword)` → mencari berdasarkan ID atau nama.  
-    - `cariBarang(int minStok)` → mencari berdasarkan minimal stok.
-- **Cari** Method cari diperbarui dalam penerapan overload cariBarang(String keyword) dan cariBarang(int ).
+---
+
   ---
 ## ✨ Fitur Utama
 1. **Tambah Barang (Create)** → input ID, nama, stok, lokasi, dan kategori.  
@@ -48,25 +54,22 @@ Program ini sudah menerapkan:
 
 ## 📂 Penjelasan Class
 
-### 🧱 `Barang` *(Abstract Class)*  
-- Superclass dari semua jenis barang.  
-- Memiliki properti dasar:  
-  - `idBarang`, `namaBarang`, `stok`, `lokasi`  
-- Menerapkan **Encapsulation** (getter & setter) dan mendefinisikan `tampilkanInfo()` sebagai abstract method.
+### 🧱 `Barang` *(Abstract Class / ORM Base)*
+* Superclass, basis ORM, dan penegak kontrak OOP.
+* Menerapkan **Encapsulation**, **JDBC/ORM** (`save`, `update` atribut umum, `delete`), dan kontrak abstrak **`displayInfo()`**.
 
-### ⚡ `Elektronik` *(Subclass)*  
-- Mewarisi `Barang` dan menambahkan properti: `garansiBulan`.  
-- Override `tampilkanInfo()` untuk menampilkan detail elektronik.  
-- Mengimplementasikan interface `Categorizable`.
+### ⚡ `Elektronik` & 🪑 `Perabot` *(Subclass)*
+* Mewarisi `Barang`, menambahkan properti spesifik (`garansiBulan`, `bahan`).
+* Mengimplementasikan validasi dan *override* **`displayInfo()`** dan **`getKategori()`**.
 
-### 🪑 `Perabot` *(Subclass)*  
-- Mewarisi `Barang` dan menambahkan properti: `bahan`.  
-- Override `tampilkanInfo()` untuk menampilkan detail perabot.  
-- Mengimplementasikan interface `Categorizable`.
+### 🔎 `ManajemenGudang` *(Service/Controller)*
+* Mengelola alur program, *user input*, *error handling* terpusat, dan memanggil logika ORM.
 
-### 🔎 `ManajemenGudang` *(Controller)*  
-- Berisi seluruh logika CRUD dan pencarian barang.  
-- Menangani validasi input, total barang, serta pencarian dengan **Overloading**.  
+### 📊 `View` *(Data Read)*
+* Menggunakan **JDBC `Statement`** untuk menjalankan kueri `SELECT` dan `COUNT(*)` dan memformat output data.
+
+### 🔌 `Conn` *(JDBC Utility)*
+* Menyediakan detail dan fungsi koneksi database (`connect()`).
 
 ### 🖥️ `Main` *(View)*  
 - Menyediakan tampilan menu utama dan menghubungkan pengguna dengan controller.  
@@ -76,6 +79,35 @@ Program ini sudah menerapkan:
 - Interface sederhana yang mendefinisikan method `getKategori()`.  
 - Dipakai oleh subclass (`Elektronik`, `Perabot`) untuk menampilkan kategori masing-masing.  
 - Membantu menjaga konsistensi informasi kategori antar jenis barang.
+---
+## 🗃️ Penjelasan Implementasi Khusus
+
+### Penjelasan Letak Abstraction (Abstract Class & Method)
+Abstraction diterapkan pada class **`Barang`** di package `model`.
+* **`Barang`** dijadikan `abstract class` karena hanya mendefinisikan struktur umum barang (ID, nama, stok, lokasi) tanpa implementasi penuh.
+* Method **`displayInfo()`** dibuat `abstract`, memaksa setiap subclass (`Elektronik`, `Perabot`) untuk mendefinisikan implementasi tampilannya sendiri.
+
+### Penjelasan Letak Interface
+Interface **`Categorizable`** diimplementasikan oleh `Barang`.
+* Interface ini mendefinisikan kontrak method **`String getKategori()`**, memastikan setiap objek barang dapat mengembalikan kategorinya secara konsisten.
+
+### Penjelasan Letak Polymorphism
+* **Overriding:** Terjadi pada method **`displayInfo()`** dan **`getKategori()`** di subclass.
+* **Dynamic Dispatch:** Di `ManajemenGudang`, saat memanggil `barang.displayInfo()`, JVM secara dinamis menentukan method mana yang akan dijalankan berdasarkan tipe objek aktual (`Elektronik` atau `Perabot`).
+
+### Penjelasan Letak Penerapan JDBC
+Program menggunakan JDBC untuk semua operasi data.
+
+* **`model/Conn.java`**: Bertanggung jawab memuat driver dan membuka koneksi (`connect()`).
+* **`model/View.java`**: Menggunakan **`Statement`** untuk menjalankan kueri *Read All* dan *Count* data dari database.
+* **`model/Barang.java`**: Menggunakan **`PreparedStatement`** untuk operasi `save`, `update`, dan `delete` yang lebih aman.
+
+### Penjelasan Letak Penerapan ORM
+Class **`Barang`** bertindak sebagai *Data Mapper* yang memetakan objek ke baris tabel `barang`.
+
+* **Create (`save()`):** Atribut objek (`this.idBarang`, `this.stok`, dll.) langsung dimasukkan ke `PreparedStatement`. Logika `instanceof` digunakan untuk memetakan atribut spesifik subclass (`garansiBulan` atau `bahan`) ke kolom yang benar.
+* **Update (`ManajemenGudang`):** Logic update yang kompleks mengambil nilai dari objek di memori (`((Elektronik) barang).getGaransiBulan()`) dan mengirimkannya melalui `PreparedStatement` terpisah ke database, memastikan objek dan data database selalu sinkron.
+
 ---
 
 <details>
